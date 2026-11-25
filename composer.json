@@ -1,0 +1,20 @@
+{
+  "name": "axin2024/creative-batch",
+  "description": "Brand asset planning, review and delivery for e-commerce teams",
+  "type": "project",
+  "license": "Apache-2.0",
+  "require": {
+    "php": "^8.2",
+    "ext-curl": "*",
+    "ext-gd": "*",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*",
+    "ext-zip": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "CreativeBatch\\": "src/"
+    }
+  }
+}

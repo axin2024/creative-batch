@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creative Batch · 创意工单</title>
+  <link rel="stylesheet" href="/studio.css">
+  <script src="/studio.js" defer></script>
+</head>
+<body>
+  <header><a href="/" class="identity">Creative Batch <span>创意工单</span></a><span id="identity"></span></header>
+  <main>
+    <section id="login" class="panel">
+      <h1>连接工作室</h1>
+      <form><label>工作室凭据<input id="token" type="password" required autocomplete="off"></label><button>登录</button></form>
+    </section>
+    <div id="workspace" hidden>
+      <aside>
+        <div class="row"><h2>生产批次</h2><button id="refresh" type="button">刷新</button></div>
+        <div id="batches"></div>
+        <details id="new-batch" hidden>
+          <summary>新建批次</summary>
+          <form id="plan">
+            <label>批次名称<input name="campaign" required pattern="[a-z0-9][a-z0-9-]{0,47}"></label>
+            <label>产品变体<select id="variants" multiple required></select></label>
+            <label>渠道模板<select id="templates" multiple required></select></label>
+            <label>艺术指导<select name="provider"><option value="replay">本地预设</option><option value="live">连接模型</option></select></label>
+            <div class="row"><label>每款候选数<input name="count" type="number" value="2" min="1" max="4" required></label>
+              <label>预算上限（微单位）<input name="budget" type="number" value="0" min="0" required></label></div>
+            <label>活动开始（本地时间）<input type="datetime-local" name="start" required></label>
+            <label>活动结束（本地时间）<input type="datetime-local" name="end" required></label>
+            <button>核算批次</button>
+          </form>
+        </details>
+      </aside>
+      <section id="campaign" aria-label="批次详情"><p class="empty">从左侧选择一个生产批次。</p></section>
+    </div>
+    <output id="notice" role="status" aria-live="polite"></output>
+  </main>
+</body>
+</html>
