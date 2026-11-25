@@ -1,0 +1,45 @@
+name: Creative batch acceptance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lifecycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: creative-ci-root
+          MYSQL_DATABASE: creative_test
+          MYSQL_USER: creative_test
+          MYSQL_PASSWORD: creative-ci-app
+        ports:
+          - 3306/tcp
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Verify PHP, browser script and MySQL lifecycle
+        env:
+          CREATIVE_MYSQL_DSN: mysql:host=127.0.0.1;port=${{ job.services.mysql.ports[3306] }};dbname=creative_test;charset=utf8mb4
+          CREATIVE_MYSQL_USER: creative_test
+          CREATIVE_MYSQL_PASSWORD: creative-ci-app
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --yes php-cli php-gd php-zip php-mysql php-curl
+          find src public tests bin -name '*.php' -print0 | xargs -0 -n1 php -l
+          node --check public/studio.js
+          php tests/lifecycle.php
