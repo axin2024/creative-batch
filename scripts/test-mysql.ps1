@@ -1,7 +1,8 @@
 param(
     [Parameter(Mandatory)][string]$MySQLBin,
     [string]$Php = 'php.exe',
-    [ValidateSet('Lifecycle','Live')][string]$Scenario = 'Lifecycle'
+    [ValidateSet('Lifecycle','Live','Provider','Upgrade','Browser')][string]$Scenario = 'Lifecycle',
+    [string]$PlaywrightCli
 )
 
 $ErrorActionPreference = 'Stop'
@@ -10,6 +11,7 @@ $mysqlBinPath = (Resolve-Path -LiteralPath $MySQLBin).Path
 $mysql = Join-Path $mysqlBinPath 'mysql.exe'
 $mysqladmin = Join-Path $mysqlBinPath 'mysqladmin.exe'
 $mysqld = Join-Path $mysqlBinPath 'mysqld.exe'
+$mysqldump = Join-Path $mysqlBinPath 'mysqldump.exe'
 $root = (New-Item -ItemType Directory -Force -Path (Join-Path $project '.local')).FullName
 $name = 'mysql-' + [guid]::NewGuid().ToString('N')
 $fixture = (New-Item -ItemType Directory -Path (Join-Path $root $name)).FullName
@@ -41,6 +43,8 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '$rootPassword';
 CREATE DATABASE creative_test CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin;
 CREATE USER 'creative_test'@'127.0.0.1' IDENTIFIED BY '$password';
 GRANT ALL ON creative_test.* TO 'creative_test'@'127.0.0.1';
+CREATE DATABASE creative_restored CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_bin;
+GRANT ALL ON creative_restored.* TO 'creative_test'@'127.0.0.1';
 "@ | Set-Content -LiteralPath $init -Encoding ascii
     $process = Start-Process -FilePath $mysqld -ArgumentList ($argsForMySQL + @('--bind-address=127.0.0.1', "--port=$port", ('--init-file="{0}"' -f $init))) -PassThru -WindowStyle Hidden
     foreach ($item in $variables.Keys) { [Environment]::SetEnvironmentVariable($item, $variables[$item], 'Process') }
@@ -60,7 +64,66 @@ GRANT ALL ON creative_test.* TO 'creative_test'@'127.0.0.1';
         if ((& $Php -m) -notcontains $extension) { $extensions += @('-d', "extension=$extension") }
     }
     $path = Join-Path $project "tests/$($Scenario.ToLowerInvariant()).php"
-    & $Php @extensions $path
+    if ($Scenario -eq 'Upgrade') {
+        $priorCommit = git -C $project rev-parse 'v1.0.0^{commit}'
+        if ($LASTEXITCODE -ne 0) { throw 'The v1.0.0 source ref is required for the upgrade scenario.' }
+        $sourceZip = Join-Path $fixture 'v1.0.0.zip'
+        $prior = Join-Path $fixture 'prior'
+        $evidence = Join-Path $fixture 'historical.json'
+        $backup = Join-Path $fixture 'creative.sql'
+        git -C $project archive --format=zip "--output=$sourceZip" $priorCommit
+        if ($LASTEXITCODE -ne 0) { throw 'Could not export the previous source.' }
+        Expand-Archive -LiteralPath $sourceZip -DestinationPath $prior
+        & $Php @extensions $path seed $prior $evidence
+        if ($LASTEXITCODE -ne 0) { throw 'Could not create a delivery in the previous version.' }
+        & $mysqldump @client --user=creative_test --single-transaction --hex-blob --no-tablespaces --set-gtid-purged=OFF "--result-file=$backup" creative_test
+        if ($LASTEXITCODE -ne 0) { throw 'MySQL backup failed.' }
+        $import = Start-Process -FilePath $mysql -ArgumentList ($client + @('--user=creative_test', 'creative_restored')) -RedirectStandardInput $backup -WindowStyle Hidden -Wait -PassThru
+        if ($import.ExitCode -ne 0) { throw 'MySQL restore failed.' }
+        $env:CREATIVE_MYSQL_DSN = $variables.CREATIVE_MYSQL_DSN.Replace('dbname=creative_test;', 'dbname=creative_restored;')
+        & $Php @extensions $path verify $project $evidence $priorCommit (Get-FileHash -LiteralPath $backup -Algorithm SHA256).Hash.ToLowerInvariant()
+    } elseif ($Scenario -eq 'Browser') {
+        if (!$PlaywrightCli) { throw 'Provide the path to the installed Playwright CLI JavaScript entry point.' }
+        $cli = (Resolve-Path -LiteralPath $PlaywrightCli).Path
+        $testCode = Join-Path $fixture 'browser-scenario.js'
+        & $Php @extensions $path $testCode
+        if ($LASTEXITCODE -ne 0) { throw 'Could not create the browser fixture.' }
+        $webListener = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, 0)
+        $webListener.Start()
+        try { $webPort = $webListener.LocalEndpoint.Port } finally { $webListener.Stop() }
+        $web = Start-Process -FilePath (Get-Command $Php).Source -ArgumentList ($extensions + @('-S', "127.0.0.1:$webPort", '-t', 'public', 'public/index.php')) `
+            -WorkingDirectory $project -RedirectStandardError (Join-Path $fixture 'web.log') -WindowStyle Hidden -PassThru
+        Push-Location -LiteralPath $fixture
+        try {
+            $origin = "http://127.0.0.1:$webPort"
+            $ready = $false
+            for ($attempt = 0; $attempt -lt 40; $attempt++) {
+                if ($web.HasExited) { break }
+                try { $ready = (Invoke-RestMethod -Uri "$origin/api/health" -TimeoutSec 1).status -eq 'ready' } catch {}
+                if ($ready) { break }
+                Start-Sleep -Milliseconds 250
+            }
+            if (!$ready) { throw 'Disposable web process did not reach ready status.' }
+            & node $cli "-s=$name" open $origin --browser=chrome | Out-Null
+            if ($LASTEXITCODE -ne 0) { throw 'Could not open the isolated headless Chrome session.' }
+            $browsed = & node $cli "-s=$name" run-code "--filename=$testCode"
+            $exitCode = $LASTEXITCODE
+            $reported = [regex]::Match(($browsed -join "`n"), '(?ms)^### Result\s+(.*?)^### ')
+            $result = if ($reported.Success) { $reported.Groups[1].Value | ConvertFrom-Json }
+            if ($exitCode -ne 0 -or $result.result -ne 'BROWSER_ACCEPTANCE_PASSED') {
+                $browsed | Select-String -Pattern '^### |^\w+Error:|^\{"result"|waiting for|dialog' | Where-Object { $_.Line -notmatch '^\s+(const|await|page\.)' } | Select-Object -First 10 | Write-Output
+                throw 'The browser scenario did not pass.'
+            }
+            $result | ConvertTo-Json -Compress
+        } finally {
+            & node $cli "-s=$name" close *> $null
+            Pop-Location
+            if (!$web.HasExited) { Stop-Process -InputObject $web; $web.WaitForExit() }
+        }
+        $global:LASTEXITCODE = 0
+    } else {
+        & $Php @extensions $path
+    }
     if ($LASTEXITCODE -ne 0) { throw "Failed $Scenario scenario" }
 } finally {
     if (Test-Path -LiteralPath $init) { Remove-Item -LiteralPath $init }

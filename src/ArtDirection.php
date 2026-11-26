@@ -6,14 +6,14 @@ namespace CreativeBatch;
 
 final class ArtDirection
 {
-    public function choose(string $provider, array $unit, int $seed): array
+    public function choose(string $provider, array $unit, int $seed, string $providerRef, ?string $expectedModel): array
     {
         if ($provider === 'replay') {
             return ['layout' => Raster::LAYOUTS[$seed % count(Raster::LAYOUTS)],
                 'finish' => Raster::FINISHES[intdiv($seed, 3) % count(Raster::FINISHES)], 'model' => 'local-fixture'];
         }
         $url = getenv('CREATIVE_MODEL_URL') ?: '';
-        $model = getenv('CREATIVE_MODEL_NAME') ?: '';
+        $model = self::configuredModel($expectedModel);
         $token = getenv('CREATIVE_MODEL_TOKEN') ?: '';
         $target = parse_url($url);
         $local = in_array($target['host'] ?? '', ['127.0.0.1', '[::1]'], true);
@@ -21,10 +21,10 @@ final class ArtDirection
             isset($target['query']) || isset($target['fragment']) ||
             !str_ends_with($target['path'] ?? '', '/v1/chat/completions') ||
             (($target['scheme'] ?? '') !== 'https' && !(($target['scheme'] ?? '') === 'http' && $local)) ||
-            $model === '' || strlen($model) > 128 || preg_match('/[\r\n\x00]/D', $token)) {
+            preg_match('/[\r\n\x00]/D', $token)) {
             throw new Problem(503, 'provider-unavailable', 'Configure a supported art direction provider.');
         }
-        $headers = ['Content-Type: application/json'];
+        $headers = ['Content-Type: application/json', 'Idempotency-Key: ' . $providerRef];
         if ($token !== '') {
             $headers[] = 'Authorization: Bearer ' . $token;
         }
@@ -80,6 +80,7 @@ final class ArtDirection
                 'finish' => Values::choose($direction['finish'] ?? null, Raster::FINISHES),
                 'model' => $model, 'prompt_tokens' => self::tokens($usage['prompt_tokens'] ?? null),
                 'output_tokens' => self::tokens($usage['completion_tokens'] ?? null),
+                'reported_cost_micros' => self::reportedCost($usage['cost_micros'] ?? null),
                 'response_sha256' => hash('sha256', $body)];
         } catch (\JsonException | \TypeError | Problem) {
             throw new Problem(503, 'provider-invalid-output', 'The remote layout did not match the expected schema.');
@@ -89,5 +90,22 @@ final class ArtDirection
     private static function tokens(mixed $value): ?int
     {
         return is_int($value) && $value >= 0 && $value <= 1_000_000 ? $value : null;
+    }
+
+    public static function configuredModel(?string $expectedModel = null): string
+    {
+        $model = getenv('CREATIVE_MODEL_NAME') ?: '';
+        if ($model === '' || strlen($model) > 128 || preg_match('/[\x00-\x1f\x7f]/D', $model) || !preg_match('//u', $model)) {
+            throw new Problem(503, 'provider-unavailable', 'Configure a supported art direction model.');
+        }
+        if ($expectedModel !== null && $model !== $expectedModel) {
+            throw new Problem(503, 'provider-model-changed', 'Restore the model configured when the batch was planned.');
+        }
+        return $model;
+    }
+
+    private static function reportedCost(mixed $value): ?int
+    {
+        return is_int($value) && $value >= 0 && $value <= 1_000_000_000 ? $value : null;
     }
 }

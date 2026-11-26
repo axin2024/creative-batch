@@ -1,0 +1,191 @@
+{
+  "model_mode": "live",
+  "accepted_for_human_review": 6,
+  "assets": {
+    "coast:banner": {
+      "art_direction": {
+        "model": "creative-qwen",
+        "finish": "studio",
+        "layout": "center",
+        "output_tokens": 10,
+        "prompt_tokens": 84,
+        "response_sha256": "d88272035e9cf5a84e660020e9ceca4e5f8a4a01240bd84d071835fb2a740fb3",
+        "reported_cost_micros": null
+      },
+      "quality": {
+        "changed": 0,
+        "sampled": 67352,
+        "dimensions": true,
+        "actual_size": {
+          "width": 1200,
+          "height": 628
+        },
+        "source_check": "passed",
+        "expected_size": {
+          "width": 1200,
+          "height": 628
+        },
+        "source_pixels": true
+      },
+      "duration_ms": 612,
+      "sha256": "54568eed3ca8a86f0b64e33d749093f41b4abf38d34391ff97aed4b8703ef4c6"
+    },
+    "coast:portrait": {
+      "art_direction": {
+        "model": "creative-qwen",
+        "finish": "studio",
+        "layout": "center",
+        "output_tokens": 10,
+        "prompt_tokens": 83,
+        "response_sha256": "527fa8115d314602c093aa2f6b03ba2aed36899785546eea8891d3601e497c3f",
+        "reported_cost_micros": null
+      },
+      "quality": {
+        "changed": 0,
+        "sampled": 17603,
+        "dimensions": true,
+        "actual_size": {
+          "width": 720,
+          "height": 960
+        },
+        "source_check": "passed",
+        "expected_size": {
+          "width": 720,
+          "height": 960
+        },
+        "source_pixels": true
+      },
+      "duration_ms": 558,
+      "sha256": "83b97fa95224514fc85739e9ee097e8f803ea9a0b237e77cc01e946423b49b63"
+    },
+    "coast:square": {
+      "art_direction": {
+        "model": "creative-qwen",
+        "finish": "studio",
+        "layout": "center",
+        "output_tokens": 10,
+        "prompt_tokens": 83,
+        "response_sha256": "43350b841cdb283202beb9c14f5af51689ffdff1691188bc454376d41c991efb",
+        "reported_cost_micros": null
+      },
+      "quality": {
+        "changed": 0,
+        "sampled": 22286,
+        "dimensions": true,
+        "actual_size": {
+          "width": 720,
+          "height": 720
+        },
+        "source_check": "passed",
+        "expected_size": {
+          "width": 720,
+          "height": 720
+        },
+        "source_pixels": true
+      },
+      "duration_ms": 404,
+      "sha256": "72547e6897d77d6b5b7ad117c9e8d2c1eaa888b2a12e7616726837b8abaeef04"
+    },
+    "coral:banner": {
+      "art_direction": {
+        "model": "creative-qwen",
+        "finish": "studio",
+        "layout": "center",
+        "output_tokens": 10,
+        "prompt_tokens": 84,
+        "response_sha256": "633f744c77a0c2db877650498edce155c7134115abb0c3c2c0655e9be7df6a58",
+        "reported_cost_micros": null
+      },
+      "quality": {
+        "changed": 0,
+        "sampled": 67352,
+        "dimensions": true,
+        "actual_size": {
+          "width": 1200,
+          "height": 628
+        },
+        "source_check": "passed",
+        "expected_size": {
+          "width": 1200,
+          "height": 628
+        },
+        "source_pixels": true
+      },
+      "duration_ms": 382,
+      "sha256": "e8ffd3f9f19301c5926d844580a4f80561a45defbc3f5f725d8daf168f707e05"
+    },
+    "coral:portrait": {
+      "art_direction": {
+        "model": "creative-qwen",
+        "finish": "studio",
+        "layout": "center",
+        "output_tokens": 10,
+        "prompt_tokens": 82,
+        "response_sha256": "f8a6a92e5e6af2b1d37a6f434b82a3ec55db7c646b6b6b4c08214b5383d61dbb",
+        "reported_cost_micros": null
+      },
+      "quality": {
+        "changed": 0,
+        "sampled": 17603,
+        "dimensions": true,
+        "actual_size": {
+          "width": 720,
+          "height": 960
+        },
+        "source_check": "passed",
+        "expected_size": {
+          "width": 720,
+          "height": 960
+        },
+        "source_pixels": true
+      },
+      "duration_ms": 496,
+      "sha256": "3bf597b4b6662b5dc2e736a35d6398f85f9eb7edd7945e88fb4bcf91ce183906"
+    },
+    "coral:square": {
+      "art_direction": {
+        "model": "creative-qwen",
+        "finish": "studio",
+        "layout": "center",
+        "output_tokens": 10,
+        "prompt_tokens": 82,
+        "response_sha256": "89112343c32947b4a8209a5f6773b1a93b5c88251b457e83c76d202b07aaf681",
+        "reported_cost_micros": null
+      },
+      "quality": {
+        "changed": 0,
+        "sampled": 22286,
+        "dimensions": true,
+        "actual_size": {
+          "width": 720,
+          "height": 720
+        },
+        "source_check": "passed",
+        "expected_size": {
+          "width": 720,
+          "height": 720
+        },
+        "source_pixels": true
+      },
+      "duration_ms": 336,
+      "sha256": "0b73c944cad48901a30702e303bb9e6a81c17e7e5c0d8f1138a1d3f1d604e041"
+    }
+  },
+  "meter": [
+    {
+      "source": "live",
+      "completed": 6,
+      "cost_micros": "0",
+      "prompt_tokens": "498",
+      "output_tokens": "60"
+    }
+  ],
+  "provenance": {
+    "runtime": "llama.cpp b12686",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct-GGUF Q4_K_M",
+    "weights_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+    "execution": "CPU",
+    "threads": 4,
+    "captured_at": "2026-11-26T06:54:26.0568503Z"
+  }
+}

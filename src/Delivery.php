@@ -91,6 +91,16 @@ final class Delivery
         return $this->db->transaction(function () use ($scope, $id, $publish): array {
             $this->catalog->lockStudio($scope);
             $batch = $this->production->batch($scope, $id);
+            $manifestVersion = $batch['frozen']['delivery_manifest_version'] ?? 1;
+            $costs = [];
+            if ($manifestVersion === 2) {
+                $candidates = $this->db->all('SELECT unit_key,evidence FROM candidates WHERE tenant=? AND batch=?', [$scope->tenant, $id]);
+                foreach ($candidates as &$candidateUsage) {
+                    $candidateUsage['evidence'] = Values::decode($candidateUsage['evidence']);
+                }
+                unset($candidateUsage);
+                $costs = Production::candidateCosts(array_keys($batch['frozen']['units']), $candidates);
+            }
             $entries = [];
             $blocked = [];
             foreach ($batch['frozen']['units'] as $key => $unit) {
@@ -116,16 +126,24 @@ final class Delivery
                     $blocked[$key] = $error->kind;
                     continue;
                 }
-                $cost = $this->db->one('SELECT COUNT(*) AS outputs,COALESCE(SUM(m.cost_micros),0) AS cost
-                    FROM generation_meter m JOIN generation_tasks t ON t.tenant=m.tenant AND t.id=m.task
-                    WHERE t.tenant=? AND t.batch=? AND t.unit_key=?', [$scope->tenant, $id, $key]);
+                if ($manifestVersion === 2) {
+                    $usage = $costs[$key];
+                    $cost = ['outputs' => $usage['replay_outputs'] + $usage['live_outputs'], 'cost' => $usage['live_estimated_micros']];
+                } else {
+                    $cost = $this->db->one('SELECT COUNT(*) AS outputs,COALESCE(SUM(m.cost_micros),0) AS cost
+                        FROM generation_meter m JOIN generation_tasks t ON t.tenant=m.tenant AND t.id=m.task
+                        WHERE t.tenant=? AND t.batch=? AND t.unit_key=?', [$scope->tenant, $id, $key]);
+                }
                 $entries[$key] = $unit + ['filename' => $unit['variant'] . '/' . $unit['channel'] . '.png',
                     'output_sha256' => $image['digest'], 'candidate' => $candidate['id'], 'review_revision' => $candidate['review_revision'],
                     'selection_revision' => $selected['revision'], 'selection_reason' => $selected['reason'],
                     'candidates_charged' => $cost['outputs'], 'allocated_cost_micros' => (int) $cost['cost']];
+                if ($manifestVersion === 2) {
+                    $entries[$key]['candidate_costs'] = $costs[$key];
+                }
             }
             ksort($entries);
-            $manifest = ['version' => 1, 'campaign' => $batch['campaign'], 'input_sha256' => $batch['input_hash'],
+            $manifest = ['version' => $manifestVersion, 'campaign' => $batch['campaign'], 'input_sha256' => $batch['input_hash'],
                 'provider' => $batch['provider'], 'campaign_start' => $batch['rights_from'], 'campaign_end' => $batch['rights_until'],
                 'entries' => $entries];
             if (!$publish) {
@@ -159,7 +177,10 @@ final class Delivery
     public function bundles(Scope $scope, string $id): array
     {
         $scope->requireRole('operator', 'channel');
-        $this->production->batch($scope, $id);
+        $batch = $this->production->batch($scope, $id);
+        if ($scope->role === 'channel' && $batch['phase'] !== 'published') {
+            throw Problem::missing();
+        }
         return $this->db->all('SELECT id,revision,digest,created_at FROM bundles WHERE tenant=? AND batch=? ORDER BY revision DESC',
             [$scope->tenant, $id]);
     }

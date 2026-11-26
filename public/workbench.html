@@ -18,13 +18,16 @@
       <aside>
         <div class="row"><h2>生产批次</h2><button id="refresh" type="button">刷新</button></div>
         <div id="batches"></div>
+        <button id="next-batches" class="secondary" type="button" hidden>更多批次</button>
+        <button id="operations" class="secondary" type="button" hidden>生产统计</button>
+        <button id="assets" class="secondary" type="button" hidden>素材与授权</button>
         <details id="new-batch" hidden>
           <summary>新建批次</summary>
           <form id="plan">
             <label>批次名称<input name="campaign" required pattern="[a-z0-9][a-z0-9-]{0,47}"></label>
             <label>产品变体<select id="variants" multiple required></select></label>
             <label>渠道模板<select id="templates" multiple required></select></label>
-            <label>艺术指导<select name="provider"><option value="replay">本地预设</option><option value="live">连接模型</option></select></label>
+            <label>生成方式<select name="provider"><option value="replay">本地回放</option><option value="live">模型布局与本地合成</option><option value="image">图像后端与本地合成</option></select></label>
             <div class="row"><label>每款候选数<input name="count" type="number" value="2" min="1" max="4" required></label>
               <label>预算上限（微单位）<input name="budget" type="number" value="0" min="0" required></label></div>
             <label>活动开始（本地时间）<input type="datetime-local" name="start" required></label>

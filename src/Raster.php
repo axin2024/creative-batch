@@ -43,7 +43,7 @@ final class Raster
         return self::encode($base);
     }
 
-    public static function render(array $unit, string $source, array $direction, bool $badPackaging = false): string
+    public static function render(array $unit, string $source, array $direction, bool $badPackaging = false, ?string $backgroundPng = null): string
     {
         $sourceImage = self::decode($source);
         [$x, $y, $w, $h] = self::bounds($unit, $sourceImage, $direction['layout']);
@@ -54,6 +54,14 @@ final class Raster
             $position = $row / max(1, $unit['height'] - 1);
             $mix = $direction['finish'] === 'studio' ? 0.12 * $position : 0.28 * $position;
             imageline($out, 0, $row, $unit['width'] - 1, $row, self::color($out, self::mix($background, $accent, $mix)));
+        }
+        if ($backgroundPng !== null) {
+            $generated = self::decode($backgroundPng);
+            $factor = max($unit['width'] / imagesx($generated), $unit['height'] / imagesy($generated));
+            $cropWidth = max(1, (int) floor($unit['width'] / $factor));
+            $cropHeight = max(1, (int) floor($unit['height'] / $factor));
+            imagecopyresampled($out, $generated, 0, 0, intdiv(imagesx($generated) - $cropWidth, 2),
+                intdiv(imagesy($generated) - $cropHeight, 2), $unit['width'], $unit['height'], $cropWidth, $cropHeight);
         }
         $halo = self::color($out, self::mix($background, $accent, 0.24));
         if ($direction['finish'] === 'halo') {
@@ -74,20 +82,28 @@ final class Raster
         $contrast = array_sum($background) > 400 ? [34, 31, 33] : [245, 238, 218];
         $margin = (int) (min($unit['width'], $unit['height']) * $unit['margin'] / 100);
         $headline = $unit['style']['headline'];
-        $font = imagefontwidth(5) * strlen($headline) <= $unit['width'] - 2 * $margin ? 5 : 2;
-        $headline = substr($headline, 0, (int) floor(($unit['width'] - 2 * $margin) / imagefontwidth($font)));
         $ink = self::color($out, $contrast);
-        imagestring($out, $font, $margin, $margin, $headline, $ink);
-        imagestring($out, 2, $margin, $unit['height'] - $margin - 14, strtoupper($unit['color'] . ' / ' . $unit['channel']), $ink);
+        $composition = $unit['style']['composition'] ?? null;
+        if ($composition === null) {
+            $font = imagefontwidth(5) * strlen($headline) <= $unit['width'] - 2 * $margin ? 5 : 2;
+            $headline = substr($headline, 0, (int) floor(($unit['width'] - 2 * $margin) / imagefontwidth($font)));
+            imagestring($out, $font, $margin, $margin, $headline, $ink);
+            imagestring($out, 2, $margin, $unit['height'] - $margin - 14, strtoupper($unit['color'] . ' / ' . $unit['channel']), $ink);
+        } else {
+            [$textX, $textY] = self::templateBox($unit, $composition['headline_box']);
+            imagestring($out, self::templateFont($composition['font']), $textX, $textY, $headline, $ink);
+        }
         return self::encode($out);
     }
 
     public static function quality(array $unit, string $source, string $result, string $layout): array
     {
         $output = self::decode($result);
-        $dimensions = imagesx($output) === $unit['width'] && imagesy($output) === $unit['height'];
-        if (!$dimensions) {
-            return ['dimensions' => false, 'source_pixels' => false, 'sampled' => 0, 'changed' => 0];
+        $actual = ['width' => imagesx($output), 'height' => imagesy($output)];
+        $expected = ['width' => $unit['width'], 'height' => $unit['height']];
+        $size = ['actual_size' => $actual, 'expected_size' => $expected];
+        if ($actual !== $expected) {
+            return ['dimensions' => false, 'source_pixels' => false, 'sampled' => 0, 'changed' => 0] + $size;
         }
         $input = self::decode($source);
         [$x, $y, $w, $h] = self::bounds($unit, $input, $layout);
@@ -104,11 +120,27 @@ final class Raster
                 $changed += (int) ($color !== imagecolorat($output, $x + $col, $y + $row));
             }
         }
-        return ['dimensions' => true, 'source_pixels' => $checked >= 32 && $changed === 0, 'sampled' => $checked, 'changed' => $changed];
+        $sourceCheck = match (true) {
+            $checked === 0 || $changed > 0 => 'failed',
+            $checked < 32 => 'inconclusive',
+            default => 'passed',
+        };
+        return ['dimensions' => true, 'source_pixels' => $sourceCheck === 'passed', 'source_check' => $sourceCheck,
+            'sampled' => $checked, 'changed' => $changed] + $size;
     }
 
     private static function bounds(array $unit, GdImage $input, string $layout): array
     {
+        $composition = $unit['style']['composition'] ?? null;
+        if ($composition !== null) {
+            [$x, $y, $width, $height] = self::templateBox($unit, $composition['product_box']);
+            $factor = min($width / imagesx($input), $height / imagesy($input));
+            $w = max(1, (int) (imagesx($input) * $factor));
+            $h = max(1, (int) (imagesy($input) * $factor));
+            $free = $width - $w;
+            $anchor = match ($layout) { 'left' => 0, 'right' => $free, default => intdiv($free, 2) };
+            return [$x + $anchor, $y + intdiv($height - $h, 2), $w, $h];
+        }
         $wide = $unit['width'] > $unit['height'] * 1.2;
         $factor = min($unit['width'] * ($wide ? 0.50 : 0.76) / imagesx($input), $unit['height'] * 0.66 / imagesy($input));
         $w = max(1, (int) (imagesx($input) * $factor));
@@ -116,6 +148,17 @@ final class Raster
         $offset = $wide ? 0.18 : 0.10;
         $center = match ($layout) { 'left' => 0.5 - $offset, 'right' => 0.5 + $offset, default => 0.5 };
         return [(int) ($unit['width'] * $center - $w / 2), (int) ($unit['height'] * 0.54 - $h / 2), $w, $h];
+    }
+
+    public static function templateBox(array $channel, array $box): array
+    {
+        return [intdiv($channel['width'] * $box[0], 100), intdiv($channel['height'] * $box[1], 100),
+            intdiv($channel['width'] * $box[2], 100), intdiv($channel['height'] * $box[3], 100)];
+    }
+
+    public static function templateFont(string $font): int
+    {
+        return $font === 'gd-bitmap-5' ? 5 : 2;
     }
 
     private static function scale(GdImage $image, int $width, int $height): GdImage

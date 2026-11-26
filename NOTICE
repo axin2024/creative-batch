@@ -1,5 +1,7 @@
 Creative Batch
 Copyright 2026 Creative Batch contributors.
 
-The Kite Coffee fixture, including its generated PNG samples, is provided under
-the Apache License, Version 2.0.
+The fictional Kite Coffee and Bracken fixture artwork, including the example
+PNG samples and offline catalog archive, is provided under the Apache License,
+Version 2.0. Bracken source art is rendered by tests/evaluation.php. The source
+distribution includes no third-party model weights or font files.

@@ -64,13 +64,17 @@ try {
         $result = match ([$method, $domain, $id === '', $action]) {
             ['GET', 'session', true, ''] => ['tenant' => $who->tenant, 'actor' => $who->actor, 'role' => $who->role],
             ['GET', 'catalog', true, ''] => $studio->catalog->all($who),
+            ['GET', 'operations', true, ''] => $studio->operations($who),
             ['POST', 'images', true, ''] => $studio->catalog->upload($who, body(6 * 1024 * 1024)),
+            ['GET', 'rights', true, ''] => $studio->catalog->grants($who, $_GET['after'] ?? null),
+            ['POST', 'catalog', false, 'import'] => $id === 'rights'
+                ? ['results' => $studio->catalog->importGrants($who, payload()['items'] ?? [])] : throw Problem::missing(),
             ['PUT', 'brands', false, ''], ['PUT', 'channels', false, ''], ['PUT', 'templates', false, ''],
             ['PUT', 'variants', false, ''] => $studio->catalog->revise($who, $domain, $id, payload()),
             ['POST', 'rights', false, ''] => $studio->catalog->grant($who, $id, payload()),
             ['POST', 'rights', false, 'revoke'] => $studio->catalog->revoke($who, $id, Values::text(payload()['reason'] ?? null, 600)),
             ['POST', 'actors', false, 'revoke'] => ['updated' => $studio->access->revoke($who, $id)],
-            ['GET', 'batches', true, ''] => $studio->production->batches($who),
+            ['GET', 'batches', true, ''] => batchList($studio, $who),
             ['POST', 'batches', true, ''] => $studio->production->plan($who, payload()),
             ['GET', 'batches', false, ''] => $studio->production->details($who, $id),
             ['POST', 'batches', false, 'submit'] => $studio->production->submit($who, $id, Values::token(payload()['input_hash'] ?? null, 64)),
@@ -128,4 +132,16 @@ function rework(Studio $studio, CreativeBatch\Scope $scope, string $id, array $i
 {
     return $studio->production->rework($scope, $id, Values::text($input['reason'] ?? null, 600),
         Values::integer($input['expected_ordinal'] ?? null, 0, 127));
+}
+
+function batchList(Studio $studio, CreativeBatch\Scope $scope): array
+{
+    if (array_intersect_key($_GET, ['limit' => true, 'before' => true, 'phase' => true]) === []) {
+        return $studio->production->batches($scope);
+    }
+    $limit = filter_var($_GET['limit'] ?? '25', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 100]]);
+    if ($limit === false) {
+        throw Problem::invalid('Use a page size between 1 and 100.');
+    }
+    return $studio->production->batches($scope, $limit, $_GET['before'] ?? null, $_GET['phase'] ?? null);
 }

@@ -1,0 +1,54 @@
+{
+  "version": "1.1.0",
+  "date": "2026-11-26",
+  "environment": {"os": "Windows", "php": "8.2.30", "mysql": "8.4.13", "browser": "headless Chrome"},
+  "lifecycle": {
+    "initial_candidates": 12,
+    "blocked_candidates": 2,
+    "total_after_rework": 13,
+    "one_winner_selection_races": 1,
+    "manual_packaging_rejects": 1,
+    "low_confidence_sampled_pixels": 2,
+    "rights_blocks": 3,
+    "original_jobs_recovered": 1,
+    "download_receipts": 2,
+    "duration_ms": 5239
+  },
+  "offline_archive": {
+    "path": "docs/examples/kite-catalog.zip",
+    "images": 6,
+    "manifest_sha256": "b3450cba2270869873a2bb8581e4a233d41dd67bbcf9339a3b254735731325f9",
+    "archive_sha256": "a039c5892f0dc1c66a53a9199cb5e01ebc525877cbb1b4ae4032b25d76b8c93a"
+  },
+  "provider_fixture": {
+    "original_jobs": 2,
+    "submission_counts": [1, 1],
+    "readback_counts": [2, 2],
+    "cost_reported_micros": 37,
+    "rights_blocked": 1,
+    "product_pixels_preserved": 22286
+  },
+  "upgrade": {
+    "previous_commit": "f56a748eb2f781957dadc9531b419a593f716c74",
+    "backup_sha256": "752852dbaa0f59fe17e7282d885936012784640c57f74cf5d8d6ac73bbcc1ae4",
+    "previous_migrations": 3,
+    "upgrade_migrations": [4],
+    "previous_manifest_version": 1,
+    "previous_manifest_sha256": "0558ca6372d1fad2d3d55e4f74b72bdb79d4fa026d2f5c05bf8ab4056b39d611",
+    "previous_zip_sha256": "f33ad8b0933f6b7c8ae54b081e7a57074895ee409dbcac34ed04c50f14eb37ff",
+    "unchanged_restored_images": 6,
+    "new_manifest_version": 2,
+    "restored_audit_verified": true,
+    "foreign_download_blocked": true,
+    "migration_retry_verified": true
+  },
+  "browser": {
+    "roles": 4,
+    "images_loaded_for_comparison": 2,
+    "original_attempts": 1,
+    "download_receipt_verified": true,
+    "foreign_download_blocked": true,
+    "import_statuses": ["created", "existing", "rejected"],
+    "revoked_delivery_blocked": true
+  }
+}

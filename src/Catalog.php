@@ -53,6 +53,9 @@ final class Catalog
                 ],
                 'templates' => $this->template($scope, $input),
             };
+            if ($type === 'variants') {
+                $this->requireVariantIdentity($scope, $id, $previous, $fields);
+            }
             $values = ['tenant' => $scope->tenant, 'id' => $id, 'revision' => $previous + 1] + $fields;
             $marks = implode(',', array_fill(0, count($values), '?'));
             $columns = implode(',', array_keys($values));
@@ -71,29 +74,86 @@ final class Catalog
 
     public function grant(Scope $scope, string $id, array $input): array
     {
+        return $this->storeGrant($scope, $id, $input, false)['right'];
+    }
+
+    public function importGrants(Scope $scope, array $items): array
+    {
+        $scope->requireRole();
+        $results = [];
+        foreach (Values::listOf($items, 1, 100) as $position => $input) {
+            try {
+                if (!is_array($input) || array_is_list($input)) {
+                    throw Problem::invalid('Each grant must be a JSON object.');
+                }
+                $id = Values::id($input['id'] ?? null);
+                $result = $this->storeGrant($scope, $id, $input, true);
+                $results[] = ['row' => $position + 1, 'id' => $id, 'status' => $result['created'] ? 'created' : 'existing',
+                    'revision' => $result['right']['revision'], 'revoked_at' => $result['right']['revoked_at']];
+            } catch (Problem $error) {
+                $results[] = ['row' => $position + 1, 'status' => 'rejected', 'error' => $error->kind, 'message' => $error->getMessage()];
+            }
+        }
+        return $results;
+    }
+
+    private function storeGrant(Scope $scope, string $id, array $input, bool $allowReplay): array
+    {
         $scope->requireRole();
         $id = Values::id($id);
         $digest = Values::token($input['image_digest'] ?? null, 64);
         $grantor = Values::text($input['grantor'] ?? null, 160);
         $commercial = Values::boolean($input['commercial'] ?? null);
-        $channels = array_map(Values::id(...), Values::listOf($input['channels'] ?? null, 1, 20));
+        $channels = array_values(array_unique(array_map(Values::id(...), Values::listOf($input['channels'] ?? null, 1, 20))));
         $from = Values::time($input['valid_from'] ?? null);
         $until = Values::time($input['valid_until'] ?? null);
         if ($until <= $from) {
             throw Problem::invalid('The rights end must follow its start.');
         }
-        return $this->db->transaction(function () use ($scope, $id, $digest, $grantor, $commercial, $channels, $from, $until): array {
+        return $this->db->transaction(function () use ($scope, $id, $digest, $grantor, $commercial, $channels, $from, $until, $allowReplay): array {
             $this->lockStudio($scope);
-            $this->image($scope->tenant, $digest);
             if ($this->db->one('SELECT id FROM asset_rights WHERE tenant=? AND id=?', [$scope->tenant, $id])) {
+                if ($allowReplay) {
+                    $right = $this->rights($scope->tenant, $id);
+                    $sameChannels = count($channels) === count($right['scope']) && array_diff($channels, $right['scope']) === [];
+                    if ($right['image_digest'] === $digest && $right['grantor'] === $grantor && $sameChannels &&
+                        (bool) $right['commercial'] === $commercial && $right['valid_from'] === $from . '.000000' &&
+                        $right['valid_until'] === $until . '.000000') {
+                        return ['created' => false, 'right' => $right];
+                    }
+                }
                 throw Problem::conflict('Create a new rights identity for a different grant.');
             }
+            $this->image($scope->tenant, $digest);
             $this->db->exec('INSERT INTO asset_rights(tenant,id,image_digest,revision,grantor,scope,commercial,valid_from,valid_until)
-                VALUES(?,?,?,1,?,?,?,?,?)', [$scope->tenant, $id, $digest, $grantor, Values::json(array_values(array_unique($channels))),
+                VALUES(?,?,?,1,?,?,?,?,?)', [$scope->tenant, $id, $digest, $grantor, Values::json($channels),
                     (int) $commercial, $from, $until]);
             $this->db->audit($scope, 'rights-granted', $id, ['image' => $digest]);
-            return $this->rights($scope->tenant, $id);
+            return ['created' => true, 'right' => $this->rights($scope->tenant, $id)];
         });
+    }
+
+    public function grants(Scope $scope, ?string $after): array
+    {
+        $scope->requireRole();
+        $where = '';
+        $args = [$scope->tenant];
+        if ($after !== null) {
+            $boundary = $this->rights($scope->tenant, Values::id($after));
+            $where = ' AND (valid_until>? OR (valid_until=? AND id>?))';
+            array_push($args, $boundary['valid_until'], $boundary['valid_until'], $boundary['id']);
+        }
+        $rows = $this->db->all("SELECT id,image_digest,revision,grantor,scope,commercial,valid_from,valid_until,revoked_at
+            FROM asset_rights WHERE tenant=?$where ORDER BY valid_until,id LIMIT 26", $args);
+        $next = null;
+        if (count($rows) === 26) {
+            array_pop($rows);
+            $next = $rows[array_key_last($rows)]['id'];
+        }
+        foreach ($rows as &$row) {
+            $row['scope'] = Values::decode($row['scope']);
+        }
+        return ['items' => $rows, 'next_cursor' => $next];
     }
 
     public function revoke(Scope $scope, string $id, string $reason): array
@@ -185,6 +245,21 @@ final class Catalog
             'color' => Values::id($input['color'] ?? null), 'rgb' => $color, 'image_digest' => $digest, 'right_id' => $right['id']];
     }
 
+    private function requireVariantIdentity(Scope $scope, string $id, int $previous, array $fields): void
+    {
+        $identity = array_intersect_key($fields, ['brand' => true, 'sku' => true, 'color' => true]);
+        if ($previous > 0) {
+            $row = $this->revision($scope, 'variants', $id, $previous);
+            if ($identity !== array_intersect_key($row, $identity)) {
+                throw Problem::conflict('A variant revision must retain its brand, SKU and color identity.');
+            }
+        }
+        if ($this->db->one('SELECT id FROM variants WHERE tenant=? AND brand=? AND sku=? AND color=? AND id<>? LIMIT 1',
+            [$scope->tenant, $identity['brand'], $identity['sku'], $identity['color'], $id]) !== null) {
+            throw Problem::conflict('This product color already has a variant identity.');
+        }
+    }
+
     private function template(Scope $scope, array $input): array
     {
         $brand = Values::id($input['brand'] ?? null);
@@ -192,13 +267,61 @@ final class Catalog
         $channel = Values::id($input['channel'] ?? null);
         $channelRevision = Values::integer($input['channel_revision'] ?? null, 1, 1_000_000);
         $this->revision($scope, 'brands', $brand, $brandRevision);
-        $this->revision($scope, 'channels', $channel, $channelRevision);
+        $channelSpec = $this->revision($scope, 'channels', $channel, $channelRevision);
         $style = ['background' => Values::hex($input['background'] ?? null), 'accent' => Values::hex($input['accent'] ?? null),
             'headline' => Values::text($input['headline'] ?? null, 56)];
         if (preg_match('/\A[\x20-\x7e]+\z/D', $style['headline']) !== 1) {
             throw Problem::invalid('The built-in bitmap typeface supports printable ASCII headlines.');
         }
+        if (array_key_exists('composition', $input)) {
+            $style['composition'] = $this->composition($channelSpec, $style['headline'], $input['composition']);
+        }
+        if (array_key_exists('generation', $input)) {
+            $generation = $input['generation'];
+            if (!is_array($generation) || array_is_list($generation)) {
+                throw Problem::invalid('The template backend binding must be an object.');
+            }
+            $backend = Values::choose($generation['backend'] ?? null, ['replay', 'live', 'image']);
+            $model = $backend === 'replay' ? 'local-fixture' : Values::text($generation['model'] ?? null, 128);
+            $style['generation'] = ['backend' => $backend, 'model' => $model,
+                'seed_mode' => Values::choose($generation['seed_mode'] ?? 'derived', ['derived'])];
+        }
         return ['brand' => $brand, 'brand_revision' => $brandRevision, 'channel' => $channel,
             'channel_revision' => $channelRevision, 'style' => Values::json($style)];
+    }
+
+    private function composition(array $channel, string $headline, mixed $input): array
+    {
+        if (!is_array($input) || array_is_list($input)) {
+            throw Problem::invalid('The template composition requires two named safe zones.');
+        }
+        $spec = ['mask' => Values::choose($input['mask'] ?? null, ['source-alpha']),
+            'font' => Values::choose($input['font'] ?? null, ['gd-bitmap-2', 'gd-bitmap-5'])];
+        $boxes = [];
+        $margin = intdiv(min($channel['width'], $channel['height']) * $channel['margin'], 100);
+        foreach (['product_box', 'headline_box'] as $key) {
+            $box = $input[$key] ?? null;
+            if (!is_array($box) || !array_is_list($box) || count($box) !== 4) {
+                throw Problem::invalid('Each safe zone must specify left, top, width and height as percentages.');
+            }
+            [$left, $top, $width, $height] = array_map(static fn ($value) => Values::integer($value, 0, 100), $box);
+            [$x, $y, $w, $h] = Raster::templateBox($channel, [$left, $top, $width, $height]);
+            if ($w < 1 || $h < 1 || $x < $margin || $y < $margin || $x + $w > $channel['width'] - $margin ||
+                $y + $h > $channel['height'] - $margin) {
+                throw Problem::invalid('The template zones must remain inside the channel safe margin.');
+            }
+            $spec[$key] = [$left, $top, $width, $height];
+            $boxes[$key] = [$x, $y, $w, $h];
+        }
+        [$px, $py, $pw, $ph] = $boxes['product_box'];
+        [$tx, $ty, $tw, $th] = $boxes['headline_box'];
+        $font = Raster::templateFont($spec['font']);
+        if ($px < $tx + $tw && $tx < $px + $pw && $py < $ty + $th && $ty < $py + $ph) {
+            throw Problem::invalid('The headline and protected product zones cannot overlap.');
+        }
+        if (imagefontwidth($font) * strlen($headline) > $tw || imagefontheight($font) > $th) {
+            throw Problem::invalid('The full headline must fit inside its safe zone at the selected font size.');
+        }
+        return $spec;
     }
 }

@@ -35,3 +35,21 @@ function approval(int $revision): array
     return ['expected_revision' => $revision, 'verdict' => 'approved', 'reason' => 'Reviewed the approved source side by side.',
         'checks' => array_fill_keys(['color', 'packaging', 'form', 'background', 'marks'], true)];
 }
+
+function sparseSource(Studio $studio, Scope $admin): array
+{
+    $transparent = imagecreatetruecolor(320, 420);
+    imagealphablending($transparent, false);
+    imagefill($transparent, 0, 0, imagecolorallocatealpha($transparent, 0, 0, 0, 127));
+    imagesavealpha($transparent, true);
+    imagefilledrectangle($transparent, 151, 202, 154, 205, imagecolorallocate($transparent, 190, 80, 65));
+    ob_start();
+    imagepng($transparent);
+    $image = $studio->catalog->upload($admin, (string) ob_get_clean());
+    $studio->catalog->grant($admin, 'reference-sparse', ['image_digest' => $image['digest'], 'grantor' => 'Sparse test fixture',
+        'commercial' => true, 'channels' => ['square'], 'valid_from' => gmdate('Y-m-d\TH:i:s\Z', time() - 86400),
+        'valid_until' => gmdate('Y-m-d\TH:i:s\Z', time() + 20 * 86400)]);
+    $studio->catalog->revise($admin, 'variants', 'sparse', ['expected_revision' => 0, 'brand' => 'kite', 'brand_revision' => 1,
+        'sku' => 'minimal-sku', 'color' => 'coral', 'rgb' => '#b94736', 'image_digest' => $image['digest'], 'right_id' => 'reference-sparse']);
+    return $image;
+}
