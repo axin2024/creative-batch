@@ -11,8 +11,8 @@ use CreativeBatch\Values;
 require dirname(__DIR__) . '/bootstrap.php';
 
 $command = $argv[1] ?? 'help';
-if (!in_array($command, ['migrate', 'provision', 'seed', 'worker'], true)) {
-    echo "creative.php migrate\ncreative.php provision TENANT ACTOR ROLE HOURS\ncreative.php seed\ncreative.php worker [--once]\n";
+if (!in_array($command, ['migrate', 'provision', 'seed', 'worker', 'campaign-worker'], true)) {
+    echo "creative.php migrate\ncreative.php provision TENANT ACTOR ROLE HOURS\ncreative.php seed\ncreative.php worker [--once]\ncreative.php campaign-worker [--once]\n";
     exit($command === 'help' ? 0 : 2);
 }
 try {
@@ -26,16 +26,18 @@ try {
         }
         echo Values::json($studio->access->provision($argv[2], $argv[3], $argv[4], (int) $argv[5])), PHP_EOL;
     }
-    if ($command === 'seed' || $command === 'worker') {
+    if (in_array($command, ['seed', 'worker', 'campaign-worker'], true)) {
         $scope = $studio->access->authenticate('Bearer ' . (getenv('CREATIVE_TOKEN') ?: ''));
         if ($command === 'seed') {
             echo Values::json(Demo::seed($studio, $scope)), PHP_EOL;
         } else {
             do {
                 $scope = $studio->access->authenticate('Bearer ' . (getenv('CREATIVE_TOKEN') ?: ''));
-                $task = $studio->production->step($scope);
+                $task = $command === 'worker' ? $studio->production->step($scope) : $studio->campaignDispatcher->step($scope);
                 if ($task !== null) {
-                    echo Values::json(['task' => $task['id'], 'phase' => $task['phase']]), PHP_EOL;
+                    $receipt = $command === 'worker' ? ['task' => $task['id'], 'phase' => $task['phase']] :
+                        ['placement' => $task['id'], 'phase' => $task['delivery_state']];
+                    echo Values::json($receipt), PHP_EOL;
                 } elseif (($argv[2] ?? '') !== '--once') {
                     usleep(550000);
                 }

@@ -2,3 +2,4 @@
 /.local/
 /vendor/
 /dist/
+/node_modules/

@@ -22,14 +22,17 @@ function show(message, error = false) {
   noticeTimer = setTimeout(() => { notice.textContent = ''; }, 7000);
 }
 
-async function api(path, { method = 'GET', body, blob = false } = {}) {
-  const headers = { Authorization: 'Bearer ' + state.token };
+async function api(path, { method = 'GET', body, blob = false, headers: additional = {} } = {}) {
+  const headers = { ...additional, Authorization: 'Bearer ' + state.token };
   const upload = body instanceof Blob;
-  if (body !== undefined) headers['Content-Type'] = upload ? 'image/png' : 'application/json';
+  if (body !== undefined && !headers['Content-Type']) headers['Content-Type'] = upload ? 'image/png' : 'application/json';
   const res = await fetch('/api/' + path, { method, headers, body: upload || body === undefined ? body : JSON.stringify(body) });
   if (!res.ok) {
     const problem = await res.json();
-    throw new Error(problem.message ?? '请求失败');
+    const error = new Error(problem.message ?? '请求失败');
+    error.status = res.status;
+    error.problem = problem;
+    throw error;
   }
   if (blob) return { data: await res.blob(), receipt: res.headers.get('X-Creative-Receipt') };
   return res.json();
@@ -432,6 +435,7 @@ get('#login form').addEventListener('submit', event => {
       get('#operations').hidden = false;
     }
     get('#assets').hidden = !can('designer');
+    get('#campaigns').hidden = !['admin', 'operator', 'reviewer', 'designer'].includes(state.role);
     get('#token').value = '';
     get('#identity').textContent = session.tenant + ' / ' + session.actor + ' · ' + session.role;
     get('#login').hidden = true;

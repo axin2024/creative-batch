@@ -1,8 +1,12 @@
 param(
     [Parameter(Mandatory)][string]$MySQLBin,
     [string]$Php = 'php.exe',
-    [ValidateSet('Lifecycle','Live','Provider','Upgrade','Browser')][string]$Scenario = 'Lifecycle',
-    [string]$PlaywrightCli
+    [ValidateSet('Lifecycle','Live','Provider','Upgrade','Browser','Campaign')][string]$Scenario = 'Lifecycle',
+    [string]$PlaywrightCli,
+    [ValidateSet('v1.0.0','v1.1.0')][string]$PreviousTag = 'v1.1.0',
+    [switch]$Capacity,
+    [switch]$Connector,
+    [switch]$CampaignBrowser
 )
 
 $ErrorActionPreference = 'Stop'
@@ -65,9 +69,9 @@ GRANT ALL ON creative_restored.* TO 'creative_test'@'127.0.0.1';
     }
     $path = Join-Path $project "tests/$($Scenario.ToLowerInvariant()).php"
     if ($Scenario -eq 'Upgrade') {
-        $priorCommit = git -C $project rev-parse 'v1.0.0^{commit}'
-        if ($LASTEXITCODE -ne 0) { throw 'The v1.0.0 source ref is required for the upgrade scenario.' }
-        $sourceZip = Join-Path $fixture 'v1.0.0.zip'
+        $priorCommit = git -C $project rev-parse "$PreviousTag^{commit}"
+        if ($LASTEXITCODE -ne 0) { throw "The $PreviousTag source ref is required for the upgrade scenario." }
+        $sourceZip = Join-Path $fixture "$PreviousTag.zip"
         $prior = Join-Path $fixture 'prior'
         $evidence = Join-Path $fixture 'historical.json'
         $backup = Join-Path $fixture 'creative.sql'
@@ -82,6 +86,35 @@ GRANT ALL ON creative_restored.* TO 'creative_test'@'127.0.0.1';
         if ($import.ExitCode -ne 0) { throw 'MySQL restore failed.' }
         $env:CREATIVE_MYSQL_DSN = $variables.CREATIVE_MYSQL_DSN.Replace('dbname=creative_test;', 'dbname=creative_restored;')
         & $Php @extensions $path verify $project $evidence $priorCommit (Get-FileHash -LiteralPath $backup -Algorithm SHA256).Hash.ToLowerInvariant()
+    } elseif ($Scenario -eq 'Campaign') {
+        $env:CREATIVE_CHANNEL_ROOT = Join-Path $fixture 'channels'
+        $options = @(if ($Capacity) { '--capacity' })
+        if (!$env:CREATIVE_TEST_FONTS) { $env:CREATIVE_TEST_FONTS = Join-Path $project 'examples/fonts' }
+        $connectorServer = $null
+        $campaignWeb = $null
+        try {
+            if ($CampaignBrowser) {
+                $browserListener = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, 0)
+                $browserListener.Start()
+                try { $browserPort = $browserListener.LocalEndpoint.Port } finally { $browserListener.Stop() }
+                $env:CREATIVE_TEST_WEB_ORIGIN = "http://127.0.0.1:$browserPort"
+                $campaignWeb = Start-Process -FilePath (Get-Command $Php).Source -ArgumentList ($extensions + @('-S', "127.0.0.1:$browserPort", '-t', 'public', 'public/index.php')) -WorkingDirectory $project -RedirectStandardError (Join-Path $fixture 'campaign-web.log') -WindowStyle Hidden -PassThru
+            }
+            if ($Connector) {
+                if ($Capacity) { throw 'Run connector failure rehearsal separately from capacity.' }
+                $channelListener = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, 0)
+                $channelListener.Start()
+                try { $channelPort = $channelListener.LocalEndpoint.Port } finally { $channelListener.Stop() }
+                $env:CREATIVE_TEST_CHANNEL_STATE = (New-Item -ItemType Directory (Join-Path $fixture 'remote-channel')).FullName
+                $channelEndpoint = @{ url = "http://127.0.0.1:$channelPort" }
+                $env:CREATIVE_CAMPAIGN_CHANNELS = @{ square = $channelEndpoint; portrait = $channelEndpoint; banner = $channelEndpoint; email = $channelEndpoint } | ConvertTo-Json -Compress
+                $connectorServer = Start-Process -FilePath (Get-Command $Php).Source -ArgumentList @('-S', "127.0.0.1:$channelPort", 'tests/channel-router.php') -WorkingDirectory $project -RedirectStandardError (Join-Path $fixture 'channel.log') -WindowStyle Hidden -PassThru
+            }
+            & $Php @extensions $path @options
+        } finally {
+            if ($connectorServer -and !$connectorServer.HasExited) { Stop-Process -InputObject $connectorServer; $connectorServer.WaitForExit() }
+            if ($campaignWeb -and !$campaignWeb.HasExited) { Stop-Process -InputObject $campaignWeb; $campaignWeb.WaitForExit() }
+        }
     } elseif ($Scenario -eq 'Browser') {
         if (!$PlaywrightCli) { throw 'Provide the path to the installed Playwright CLI JavaScript entry point.' }
         $cli = (Resolve-Path -LiteralPath $PlaywrightCli).Path

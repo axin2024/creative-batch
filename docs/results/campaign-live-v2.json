@@ -1,0 +1,2529 @@
+{
+    "blocked": {
+        "US": {
+            "flags": [
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        649,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        714,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        779,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        844,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        909,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        974,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1039,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1104,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1169,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1234,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1299,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1364,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1429,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1494,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1559,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1624,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1689,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1754,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1819,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1884,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1949,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2014,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2079,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2144,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2209,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2274,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2339,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2404,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2469,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2534,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2599,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2664,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2729,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2794,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2859,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2924,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2989,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3054,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3119,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3184,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3249,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3314,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3379,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3444,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3509,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3574,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3639,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3704,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3769,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3834,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3899,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3964,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        4029,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        4094,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        4159,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        33.4,
+                        4228,
+                        145.07986450195312,
+                        17
+                    ],
+                    "segment": "legal"
+                }
+            ],
+            "lines": [
+                {
+                    "width": 338.49591064453125,
+                    "bounds": [
+                        34.4,
+                        190,
+                        335.243896484375,
+                        34
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 235.2099151611328,
+                    "bounds": [
+                        34.4,
+                        255,
+                        230.76492309570312,
+                        44
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        324,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        389,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        454,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        519,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        584,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        649,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        714,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        779,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        844,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        909,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        974,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1039,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        1104,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1169,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        1234,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1299,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        1364,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1429,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        1494,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1559,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        1624,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1689,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        1754,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1819,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        1884,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        1949,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2014,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2079,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2144,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2209,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2274,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2339,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2404,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2469,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2534,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2599,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2664,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2729,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2794,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2859,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        2924,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        2989,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3054,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        3119,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3184,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        3249,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3314,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        3379,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3444,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        3509,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3574,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        3639,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3704,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        3769,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3834,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        3899,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        3964,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        4029,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 304.91290283203125,
+                    "bounds": [
+                        34.4,
+                        4094,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 279.4139099121094,
+                    "bounds": [
+                        32.4,
+                        4159,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 146.43984985351562,
+                    "bounds": [
+                        33.4,
+                        4228,
+                        145.07986450195312,
+                        17
+                    ],
+                    "segment": "legal"
+                }
+            ],
+            "sources": {
+                "font": {
+                    "type": "font",
+                    "digest": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d"
+                },
+                "logo": {
+                    "type": "image",
+                    "digest": "180255bac72b178fe4d4cb0e938e2e9bfb2d1fffaf85a3629e635927014928e3"
+                },
+                "product": {
+                    "type": "image",
+                    "digest": "d76dbbcd9d9b1fc81e57c34457fee2379673b341d07c8070c37eb2e85bfd29d4"
+                },
+                "background": {
+                    "type": "image",
+                    "digest": "113233556d32e1e046f9ae491fe40ddff4bbed9973d94d1cf9a3d89f04420592"
+                }
+            },
+            "logo_box": [
+                25.2,
+                21.6,
+                122.4,
+                122.4
+            ],
+            "renderer": {
+                "chromium": "158.0.8127.36",
+                "code_sha256": "bcc6a82661a3c93a5bf4ae282a16127653138c7db3e0c1f1023fac23444b981a"
+            },
+            "term_rev": 1,
+            "alignment": "left",
+            "direction": "ltr",
+            "master_rev": 1,
+            "logo_sha256": "180255bac72b178fe4d4cb0e938e2e9bfb2d1fffaf85a3629e635927014928e3",
+            "product_box": [
+                410.4,
+                86.4,
+                288,
+                540
+            ],
+            "font_license": "OFL-1.1",
+            "layout_flags": [
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        649,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        714,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        779,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        844,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        909,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        974,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1039,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1104,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1169,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1234,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1299,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1364,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1429,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1494,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1559,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1624,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1689,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1754,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1819,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        1884,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        1949,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2014,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2079,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2144,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2209,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2274,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2339,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2404,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2469,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2534,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2599,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2664,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2729,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2794,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2859,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        2924,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        2989,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3054,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3119,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3184,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3249,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3314,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3379,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3444,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3509,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3574,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3639,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3704,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3769,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3834,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        3899,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        3964,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        4029,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        34.4,
+                        4094,
+                        299.7899169921875,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        32.4,
+                        4159,
+                        278.89093017578125,
+                        30
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "code": "safe-area-overflow",
+                    "bounds": [
+                        33.4,
+                        4228,
+                        145.07986450195312,
+                        17
+                    ],
+                    "segment": "legal"
+                }
+            ],
+            "font_evidence": "Pinned Google Fonts version",
+            "render_digest": "91d46ad3efbfd1b6281fc3f26d4ea401646be9acafeefbf6167cbd8627a6e85e",
+            "language_flags": [
+                {
+                    "code": "banned-term",
+                    "term": "miracle",
+                    "segment": "title"
+                },
+                {
+                    "code": "banned-term",
+                    "term": "guaranteed",
+                    "segment": "title"
+                },
+                {
+                    "code": "disclaimer-mismatch",
+                    "segment": "legal"
+                }
+            ],
+            "product_sha256": "d76dbbcd9d9b1fc81e57c34457fee2379673b341d07c8070c37eb2e85bfd29d4",
+            "channel_revision": 1,
+            "product_transform": "contain"
+        },
+        "AE": {
+            "flags": [
+                {
+                    "code": "missing-glyph",
+                    "segment": "title",
+                    "codepoints": [
+                        "U+642",
+                        "U+647",
+                        "U+648",
+                        "U+629",
+                        "U+643",
+                        "U+627",
+                        "U+64A",
+                        "U+62A"
+                    ]
+                },
+                {
+                    "code": "missing-glyph",
+                    "segment": "legal",
+                    "codepoints": [
+                        "U+645",
+                        "U+62A",
+                        "U+648",
+                        "U+641",
+                        "U+631",
+                        "U+62D",
+                        "U+649",
+                        "U+646",
+                        "U+627",
+                        "U+62F",
+                        "U+644",
+                        "U+643",
+                        "U+64A",
+                        "U+629"
+                    ]
+                }
+            ],
+            "lines": [
+                {
+                    "width": 177.49005126953125,
+                    "bounds": [
+                        201.50994873046875,
+                        190,
+                        175.85333251953125,
+                        43
+                    ],
+                    "segment": "title"
+                },
+                {
+                    "width": 186.41896057128903,
+                    "bounds": [
+                        192.58103942871097,
+                        263,
+                        185.22364807128903,
+                        21
+                    ],
+                    "segment": "legal"
+                }
+            ],
+            "sources": {
+                "font": {
+                    "type": "font",
+                    "digest": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d"
+                },
+                "logo": {
+                    "type": "image",
+                    "digest": "180255bac72b178fe4d4cb0e938e2e9bfb2d1fffaf85a3629e635927014928e3"
+                },
+                "product": {
+                    "type": "image",
+                    "digest": "d76dbbcd9d9b1fc81e57c34457fee2379673b341d07c8070c37eb2e85bfd29d4"
+                }
+            },
+            "logo_box": [
+                25.2,
+                21.6,
+                122.4,
+                122.4
+            ],
+            "renderer": {
+                "chromium": "158.0.8127.36",
+                "code_sha256": "bcc6a82661a3c93a5bf4ae282a16127653138c7db3e0c1f1023fac23444b981a"
+            },
+            "term_rev": 1,
+            "alignment": "right",
+            "direction": "rtl",
+            "master_rev": 1,
+            "logo_sha256": "180255bac72b178fe4d4cb0e938e2e9bfb2d1fffaf85a3629e635927014928e3",
+            "product_box": [
+                410.4,
+                86.4,
+                288,
+                540
+            ],
+            "font_license": "OFL-1.1",
+            "layout_flags": [
+                {
+                    "code": "missing-glyph",
+                    "segment": "title",
+                    "codepoints": [
+                        "U+642",
+                        "U+647",
+                        "U+648",
+                        "U+629",
+                        "U+643",
+                        "U+627",
+                        "U+64A",
+                        "U+62A"
+                    ]
+                },
+                {
+                    "code": "missing-glyph",
+                    "segment": "legal",
+                    "codepoints": [
+                        "U+645",
+                        "U+62A",
+                        "U+648",
+                        "U+641",
+                        "U+631",
+                        "U+62D",
+                        "U+649",
+                        "U+646",
+                        "U+627",
+                        "U+62F",
+                        "U+644",
+                        "U+643",
+                        "U+64A",
+                        "U+629"
+                    ]
+                }
+            ],
+            "font_evidence": "Pinned Google Fonts version",
+            "render_digest": "c24f1e51d3884824fd22d3ee301f8333760b7a072ece875a8e27ba16a4419637",
+            "language_flags": [],
+            "product_sha256": "d76dbbcd9d9b1fc81e57c34457fee2379673b341d07c8070c37eb2e85bfd29d4",
+            "channel_revision": 1,
+            "product_transform": "contain"
+        },
+        "CA": {
+            "rights_rev": null,
+            "latest_eligible_end": "2026-11-28 03:18:03",
+            "grants": [
+                {
+                    "type": "font",
+                    "digest": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+                    "id": "sans",
+                    "revision": 1,
+                    "valid_from": "2026-11-28 02:20:03",
+                    "valid_until": "2026-11-28 05:20:03",
+                    "evidence": "Regional rehearsal grant",
+                    "licensor": "Kite demo"
+                },
+                {
+                    "type": "image",
+                    "digest": "113233556d32e1e046f9ae491fe40ddff4bbed9973d94d1cf9a3d89f04420592",
+                    "id": "backdrop",
+                    "revision": 1,
+                    "valid_from": "2026-11-28 02:20:03",
+                    "valid_until": "2026-11-28 05:20:03",
+                    "evidence": "Regional rehearsal grant",
+                    "licensor": "Kite demo"
+                },
+                {
+                    "type": "image",
+                    "digest": "d76dbbcd9d9b1fc81e57c34457fee2379673b341d07c8070c37eb2e85bfd29d4",
+                    "id": "product",
+                    "revision": 1,
+                    "valid_from": "2026-11-28 02:20:03",
+                    "valid_until": "2026-11-28 05:20:03",
+                    "evidence": "Regional rehearsal grant",
+                    "licensor": "Kite demo"
+                }
+            ],
+            "blocked_regions": [
+                {
+                    "type": "image",
+                    "digest": "180255bac72b178fe4d4cb0e938e2e9bfb2d1fffaf85a3629e635927014928e3",
+                    "code": "ends-after-grant",
+                    "territory": "CA",
+                    "channel": "square",
+                    "conflict_date": "2026-11-28 03:18:03",
+                    "replacement_grants": [
+                        {
+                            "id": "logo",
+                            "revision": 1,
+                            "valid_from": "2026-11-28 02:20:03.000000",
+                            "valid_until": "2026-11-28 05:20:03.000000"
+                        }
+                    ]
+                }
+            ]
+        },
+        "CA_wrong_territory": {
+            "rights_rev": null,
+            "latest_eligible_end": "2026-11-28 05:20:03",
+            "grants": [
+                {
+                    "type": "font",
+                    "digest": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+                    "id": "sans",
+                    "revision": 1,
+                    "valid_from": "2026-11-28 02:20:03",
+                    "valid_until": "2026-11-28 05:20:03",
+                    "evidence": "Regional rehearsal grant",
+                    "licensor": "Kite demo"
+                },
+                {
+                    "type": "image",
+                    "digest": "113233556d32e1e046f9ae491fe40ddff4bbed9973d94d1cf9a3d89f04420592",
+                    "id": "backdrop",
+                    "revision": 1,
+                    "valid_from": "2026-11-28 02:20:03",
+                    "valid_until": "2026-11-28 05:20:03",
+                    "evidence": "Regional rehearsal grant",
+                    "licensor": "Kite demo"
+                },
+                {
+                    "type": "image",
+                    "digest": "d76dbbcd9d9b1fc81e57c34457fee2379673b341d07c8070c37eb2e85bfd29d4",
+                    "id": "product",
+                    "revision": 1,
+                    "valid_from": "2026-11-28 02:20:03",
+                    "valid_until": "2026-11-28 05:20:03",
+                    "evidence": "Regional rehearsal grant",
+                    "licensor": "Kite demo"
+                }
+            ],
+            "blocked_regions": [
+                {
+                    "type": "image",
+                    "digest": "180255bac72b178fe4d4cb0e938e2e9bfb2d1fffaf85a3629e635927014928e3",
+                    "code": "territory-excluded",
+                    "territory": "CA",
+                    "channel": "square",
+                    "conflict_date": "2026-11-28 05:20:03",
+                    "replacement_grants": [
+                        {
+                            "id": "logo",
+                            "revision": 1,
+                            "valid_from": "2026-11-28 02:20:03.000000",
+                            "valid_until": "2026-11-28 05:20:03.000000"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "placements": {
+        "us-fr-square": {
+            "id": "3c26df4c31de7a0c20fb32109d6a95a2",
+            "asset": "4631e1ef96ea4ca9659edff0a439154a",
+            "rights_rev": "49dc9b394c27015bbcd6ce95de0cfb5b369d6a56d1a30cdf9664ce8d35d25525",
+            "manifest_digest": "7d32f6680152a34747e761e34d30e0c2d87829ff706a33e0809e13edfbb89aac",
+            "image_sha256": "9b33bdf39c4556879655405930f95e28544b1dfecc9bfffd034176e738d04fd1",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "us-fr-portrait": {
+            "id": "bd59d6fff991e988bb41d8ce7d493f32",
+            "asset": "406fd014ea81f47896166b05382fa73f",
+            "rights_rev": "f13b20d02670b1ffafda11aec48d4ff0495e5bf04e57d2fcd9e0867376eb72ca",
+            "manifest_digest": "6275250258c17adb51bcd4138f4b78d9a83b299aeaf3e4ed6b3198dfc853ba9c",
+            "image_sha256": "9f1d18cf6f9dc9715e144dfe494a400e7098e634b3ac0d19582952246d910835",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "us-ar-square": {
+            "id": "21a313c02f977b58e232db362a71af7f",
+            "asset": "169b77a85563b25a0154cfb1289e7653",
+            "rights_rev": "cd0fbfedfe1eeba524b5e6f5df20637762701aee741e45edc3ad3bcbf4cdab54",
+            "manifest_digest": "8cf69bc449bb3acdb810542eb5d3230e97d927b378f234495d52dc20fe0be532",
+            "image_sha256": "d2246557db8006a7367bcbf723128452923594177c73b9fd16c9c0daaed26a37",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "us-ar-portrait": {
+            "id": "ff8cc8378c543f5d38710013df4dd6f3",
+            "asset": "64d198305788315234d9e1babe5d5614",
+            "rights_rev": "9470a584bed2b012557b6f8d95c6e75cbc160470deb843e75c8a3cc164c702fb",
+            "manifest_digest": "0342d72d04ca96e10179f7fc09b998e043dc7248cbdc5087a38cad506c1eed7d",
+            "image_sha256": "3196cb9bc2363b197c546865c48400ece3770456232ffb8fe5dbf274728d5ae9",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ae-fr-square": {
+            "id": "16faa45d8b0f42b9fb48ab068cc38cdd",
+            "asset": "396ac73d58a6148c204bc2e4dac0e2b3",
+            "rights_rev": "d94b737bab853dc4a5ec4be71421195eb37b0134e5365a9880168bcdbe3dbd1a",
+            "manifest_digest": "80c7a0f999ff47b1c94ef24f1c857586f03ec40b31d4067f98287d259a3a3417",
+            "image_sha256": "9b33bdf39c4556879655405930f95e28544b1dfecc9bfffd034176e738d04fd1",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ae-fr-portrait": {
+            "id": "27140c1753bf93d8a4afe8239531ff7e",
+            "asset": "6cd77546f0846248501ff46ceed5b5c0",
+            "rights_rev": "582c6587883bfdb43aa906b1b84b6c000540d32d272f3d7be3ef5f1209cec615",
+            "manifest_digest": "7aaed6b58387396b70562e673aaa64f3c4d3f4bd6d32c09b6728bc238d16feca",
+            "image_sha256": "9f1d18cf6f9dc9715e144dfe494a400e7098e634b3ac0d19582952246d910835",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ae-ar-square": {
+            "id": "e96aea92afe701da484fa1d1b84ec2e9",
+            "asset": "ded0ea2e9c63a031c584e0659346ed63",
+            "rights_rev": "882ef4a7fbc644d791717cbfbd6eefe710f5eda15e50835bb7a2c5cfcb8086af",
+            "manifest_digest": "90de19a0b13554fd905285b41089714fbd38b4203dbe44a87caa7d6fd6f673fb",
+            "image_sha256": "d2246557db8006a7367bcbf723128452923594177c73b9fd16c9c0daaed26a37",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ae-ar-portrait": {
+            "id": "5bbf81179b5eaf641654ce836e2aaaf5",
+            "asset": "7f6962072d518e13a8c60a1c497837a1",
+            "rights_rev": "c099885aa12225b93d7117c92c69e88d9f48142e63898a321dfca3cdc919a076",
+            "manifest_digest": "e0137724d3364c92a83f868c096fbafcadf50df44dca7bd3a8726bc1a3b1da38",
+            "image_sha256": "3196cb9bc2363b197c546865c48400ece3770456232ffb8fe5dbf274728d5ae9",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ca-fr-square": {
+            "id": "1aad5a712805f31f1f1165703c96b4dd",
+            "asset": "5f2ef4e1aaefc7e5fb0c43626c43ef4b",
+            "rights_rev": "a026e3433e5dbe444e2f5c67d94a884ad0992bae4404db7472eb1f26c376c841",
+            "manifest_digest": "27b6bf5583a734911fa1e274753a358923674a7a4666433f164b6b33da045276",
+            "image_sha256": "9b33bdf39c4556879655405930f95e28544b1dfecc9bfffd034176e738d04fd1",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ca-fr-portrait": {
+            "id": "a08a4b17b8b005edf4a9700c14ad5a84",
+            "asset": "0dee4e1d636679e5678863f70b092751",
+            "rights_rev": "16af8ed2f35c61f2ce37522e40f9d3a8b414be049681a6f7e5840f5a89616a1e",
+            "manifest_digest": "61802250bf50d7c02d1bccf254b8ed9ba1aef9d577e8d515a805573abf2feda0",
+            "image_sha256": "9f1d18cf6f9dc9715e144dfe494a400e7098e634b3ac0d19582952246d910835",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ca-ar-square": {
+            "id": "7bfc5237bd62763ea6ed0fd80dccec10",
+            "asset": "099fcd6b43bf9ec5e1121c93bcebf685",
+            "rights_rev": "afe9ce9494a6d40c7dfca7b707057fbfa011d5ed6adf289ed9b8df528bd84b91",
+            "manifest_digest": "34991b66e99f0dc463029e8c2045d468c89660ce5538babe47798c0046dbb6d2",
+            "image_sha256": "d2246557db8006a7367bcbf723128452923594177c73b9fd16c9c0daaed26a37",
+            "language_flags": [],
+            "layout_flags": []
+        },
+        "ca-ar-portrait": {
+            "id": "00acf679ab2d027946c63af55b187d77",
+            "asset": "a1a01c3c745978c3857f123e92df29b2",
+            "rights_rev": "e8b5f34d6ce061b8768b1365495441d0ca7452622e170304a0398bf8e9361781",
+            "manifest_digest": "bb92572aba4bdaded80c9aaf489ce20890014569864980e0ba5017bacfe54ca8",
+            "image_sha256": "3196cb9bc2363b197c546865c48400ece3770456232ffb8fe5dbf274728d5ae9",
+            "language_flags": [],
+            "layout_flags": []
+        }
+    },
+    "prepare_ms": 5238.3506,
+    "recall_plan_ms": 22.6627,
+    "recall_elapsed_ms": 189.6875,
+    "recall": {
+        "id": "7c473515e20e874bd3f5825d5e231859",
+        "asset_type": "image",
+        "source_digest": "113233556d32e1e046f9ae491fe40ddff4bbed9973d94d1cf9a3d89f04420592",
+        "reason": "Rehearse regional recall",
+        "owner": "lead",
+        "grant_id": null,
+        "grant_revision": null,
+        "created_at": "2026-11-28 03:20:08.894917",
+        "recall_id": "7c473515e20e874bd3f5825d5e231859",
+        "placements": [
+            {
+                "placement_id": "27140c1753bf93d8a4afe8239531ff7e",
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "AE",
+                "locale": "fr",
+                "channel": "portrait",
+                "delivery_state": "withdrawn",
+                "owner": "lead",
+                "withdrawal_phase": "done",
+                "attempts": 1,
+                "last_failure": null,
+                "remote_receipt": {
+                    "state": "withdrawn",
+                    "ack_at": "2026-11-28T03:20:08+00:00",
+                    "channel": "portrait",
+                    "operation": "withdraw",
+                    "operation_id": "e29ee2d61a935871342e49d1d9ef6eba8008549fcba7093d95a3db69fa27b1ac",
+                    "placement_id": "27140c1753bf93d8a4afe8239531ff7e",
+                    "manifest_digest": "7aaed6b58387396b70562e673aaa64f3c4d3f4bd6d32c09b6728bc238d16feca",
+                    "remote_revision": "local-e29ee2d61a935871342e49d1"
+                }
+            },
+            {
+                "placement_id": "16faa45d8b0f42b9fb48ab068cc38cdd",
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "AE",
+                "locale": "fr",
+                "channel": "square",
+                "delivery_state": "withdrawn",
+                "owner": "lead",
+                "withdrawal_phase": "done",
+                "attempts": 1,
+                "last_failure": null,
+                "remote_receipt": {
+                    "state": "withdrawn",
+                    "ack_at": "2026-11-28T03:20:08+00:00",
+                    "channel": "square",
+                    "operation": "withdraw",
+                    "operation_id": "edf7301d209e1819ea12b8760ffab90f04e98fd43261204d286606753a36028d",
+                    "placement_id": "16faa45d8b0f42b9fb48ab068cc38cdd",
+                    "manifest_digest": "80c7a0f999ff47b1c94ef24f1c857586f03ec40b31d4067f98287d259a3a3417",
+                    "remote_revision": "local-edf7301d209e1819ea12b876"
+                }
+            },
+            {
+                "placement_id": "a08a4b17b8b005edf4a9700c14ad5a84",
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "CA",
+                "locale": "fr",
+                "channel": "portrait",
+                "delivery_state": "withdrawn",
+                "owner": "lead",
+                "withdrawal_phase": "done",
+                "attempts": 1,
+                "last_failure": null,
+                "remote_receipt": {
+                    "state": "withdrawn",
+                    "ack_at": "2026-11-28T03:20:09+00:00",
+                    "channel": "portrait",
+                    "operation": "withdraw",
+                    "operation_id": "a6643e8336c11fa092237fe0c034ac1e5d88cdc7bf62effa6f42befdc3583a41",
+                    "placement_id": "a08a4b17b8b005edf4a9700c14ad5a84",
+                    "manifest_digest": "61802250bf50d7c02d1bccf254b8ed9ba1aef9d577e8d515a805573abf2feda0",
+                    "remote_revision": "local-a6643e8336c11fa092237fe0"
+                }
+            },
+            {
+                "placement_id": "1aad5a712805f31f1f1165703c96b4dd",
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "CA",
+                "locale": "fr",
+                "channel": "square",
+                "delivery_state": "withdrawn",
+                "owner": "lead",
+                "withdrawal_phase": "done",
+                "attempts": 1,
+                "last_failure": null,
+                "remote_receipt": {
+                    "state": "withdrawn",
+                    "ack_at": "2026-11-28T03:20:08+00:00",
+                    "channel": "square",
+                    "operation": "withdraw",
+                    "operation_id": "23f62b5160dc86ad717c99b8b1d8684c8a4cd2fd4c67ad19bff620f514e574f8",
+                    "placement_id": "1aad5a712805f31f1f1165703c96b4dd",
+                    "manifest_digest": "27b6bf5583a734911fa1e274753a358923674a7a4666433f164b6b33da045276",
+                    "remote_revision": "local-23f62b5160dc86ad717c99b8"
+                }
+            },
+            {
+                "placement_id": "bd59d6fff991e988bb41d8ce7d493f32",
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "US",
+                "locale": "fr",
+                "channel": "portrait",
+                "delivery_state": "withdrawn",
+                "owner": "lead",
+                "withdrawal_phase": "done",
+                "attempts": 1,
+                "last_failure": null,
+                "remote_receipt": {
+                    "state": "withdrawn",
+                    "ack_at": "2026-11-28T03:20:09+00:00",
+                    "channel": "portrait",
+                    "operation": "withdraw",
+                    "operation_id": "b3954e5b47a7b3146271ba87cb0837459b90eac3713a209bbf0cd5eb7d140d57",
+                    "placement_id": "bd59d6fff991e988bb41d8ce7d493f32",
+                    "manifest_digest": "6275250258c17adb51bcd4138f4b78d9a83b299aeaf3e4ed6b3198dfc853ba9c",
+                    "remote_revision": "local-b3954e5b47a7b3146271ba87"
+                }
+            },
+            {
+                "placement_id": "3c26df4c31de7a0c20fb32109d6a95a2",
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "US",
+                "locale": "fr",
+                "channel": "square",
+                "delivery_state": "withdrawn",
+                "owner": "lead",
+                "withdrawal_phase": "done",
+                "attempts": 1,
+                "last_failure": null,
+                "remote_receipt": {
+                    "state": "withdrawn",
+                    "ack_at": "2026-11-28T03:20:09+00:00",
+                    "channel": "square",
+                    "operation": "withdraw",
+                    "operation_id": "332fc103f94f0960f1f296fee614668930b58f4fdf103a748828f489f4592674",
+                    "placement_id": "3c26df4c31de7a0c20fb32109d6a95a2",
+                    "manifest_digest": "7d32f6680152a34747e761e34d30e0c2d87829ff706a33e0809e13edfbb89aac",
+                    "remote_revision": "local-332fc103f94f0960f1f296fe"
+                }
+            }
+        ],
+        "open_receipts": [],
+        "state": "withdrawn"
+    },
+    "real_model": [
+        {
+            "territory": "AE",
+            "locale": "fr",
+            "suggestion": {
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "AE",
+                "locale": "fr",
+                "revision": 1,
+                "master_revision": 1,
+                "term_revision": 1,
+                "snapshot": {
+                    "copy": {
+                        "legal": "Available while stocks last.",
+                        "title": "Kite Coffee"
+                    },
+                    "font": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+                    "direction": "ltr",
+                    "background": {
+                        "color": "#eae1ce",
+                        "source": "113233556d32e1e046f9ae491fe40ddff4bbed9973d94d1cf9a3d89f04420592"
+                    },
+                    "language_flags": [
+                        {
+                            "code": "required-term-missing",
+                            "term": "Café Kite",
+                            "segment": "title"
+                        },
+                        {
+                            "code": "disclaimer-mismatch",
+                            "segment": "legal"
+                        }
+                    ]
+                },
+                "provenance": {
+                    "model": "qwen2.5-0.5b-instruct",
+                    "usage": {
+                        "total_tokens": 111,
+                        "prompt_tokens": 95,
+                        "completion_tokens": 16,
+                        "prompt_tokens_details": {
+                            "cached_tokens": 0
+                        }
+                    },
+                    "source": "local-model",
+                    "cost_source": "local-compute",
+                    "measured_ms": 895,
+                    "input_sha256": "90426a5769918d789196886af80c1381320e27961f10c06658d7cfdc82fc7178",
+                    "model_reported": "qwen2.5-0.5b-instruct",
+                    "weights_sha256": "ca59ca7f13d0e15a8cfa77bd17e65d24f6844b554a7b6c12e07a5f89ff76844e",
+                    "response_sha256": "a3e51449811fc88b29d0da9447ad59d3eabf13c98c2e34bb592c7d2b9ac5bbc0",
+                    "original_suggestion": {
+                        "legal": "Available while stocks last.",
+                        "title": "Kite Coffee"
+                    }
+                },
+                "actor": "design",
+                "created_at": "2026-11-28 03:20:06.037541"
+            },
+            "final": {
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "AE",
+                "locale": "fr",
+                "revision": 2,
+                "master_revision": 1,
+                "term_revision": 1,
+                "snapshot": {
+                    "copy": {
+                        "legal": "Dans la limite des stocks.",
+                        "title": "Café Kite"
+                    },
+                    "font": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+                    "direction": "ltr",
+                    "background": {
+                        "color": "#eae1ce",
+                        "source": "113233556d32e1e046f9ae491fe40ddff4bbed9973d94d1cf9a3d89f04420592"
+                    },
+                    "language_flags": []
+                },
+                "provenance": {
+                    "reason": "Regional localization",
+                    "source": "manual",
+                    "cost_source": "manual",
+                    "changed_bytes": 29,
+                    "edited_segments": [
+                        "title",
+                        "legal"
+                    ],
+                    "parent_revision": 1,
+                    "suggestion_revision": 1
+                },
+                "actor": "design",
+                "created_at": "2026-11-28 03:20:06.051470"
+            },
+            "edited_segments": 2
+        },
+        {
+            "territory": "AE",
+            "locale": "ar",
+            "suggestion": {
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "AE",
+                "locale": "ar",
+                "revision": 1,
+                "master_revision": 1,
+                "term_revision": 1,
+                "snapshot": {
+                    "copy": {
+                        "legal": "متاحة حتى تتوفر stocks.",
+                        "title": "القهوة الكايت"
+                    },
+                    "font": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+                    "direction": "rtl",
+                    "background": {
+                        "color": "#eae1ce",
+                        "source": null
+                    },
+                    "language_flags": [
+                        {
+                            "code": "required-term-missing",
+                            "term": "قهوة كايت",
+                            "segment": "title"
+                        },
+                        {
+                            "code": "disclaimer-mismatch",
+                            "segment": "legal"
+                        }
+                    ]
+                },
+                "provenance": {
+                    "model": "qwen2.5-0.5b-instruct",
+                    "usage": {
+                        "total_tokens": 117,
+                        "prompt_tokens": 95,
+                        "completion_tokens": 22,
+                        "prompt_tokens_details": {
+                            "cached_tokens": 8
+                        }
+                    },
+                    "source": "local-model",
+                    "cost_source": "local-compute",
+                    "measured_ms": 1214,
+                    "input_sha256": "ad76d5b5212a427ea454f30d35df99c8714fa0d3693acb684ce9c9f74bf9decf",
+                    "model_reported": "qwen2.5-0.5b-instruct",
+                    "weights_sha256": "ca59ca7f13d0e15a8cfa77bd17e65d24f6844b554a7b6c12e07a5f89ff76844e",
+                    "response_sha256": "13373185445747ae1cd6da4566efe1606366bae7b5e5f6eac45499b596036c48",
+                    "original_suggestion": {
+                        "legal": "متاحة حتى تتوفر stocks.",
+                        "title": "القهوة الكايت"
+                    }
+                },
+                "actor": "design",
+                "created_at": "2026-11-28 03:20:07.473753"
+            },
+            "final": {
+                "campaign": "499f7e1e1fca64f73e1ade9ee5a3cf68",
+                "territory": "AE",
+                "locale": "ar",
+                "revision": 3,
+                "master_revision": 1,
+                "term_revision": 1,
+                "snapshot": {
+                    "copy": {
+                        "legal": "متوفر حتى نفاد الكمية.",
+                        "title": "قهوة كايت"
+                    },
+                    "font": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+                    "direction": "rtl",
+                    "background": {
+                        "color": "#eae1ce",
+                        "source": null
+                    },
+                    "language_flags": []
+                },
+                "provenance": {
+                    "reason": "Regional localization",
+                    "source": "manual",
+                    "cost_source": "manual",
+                    "changed_bytes": 0,
+                    "edited_segments": [],
+                    "parent_revision": 2,
+                    "suggestion_revision": 1
+                },
+                "actor": "design",
+                "created_at": "2026-11-28 03:20:07.852363"
+            },
+            "edited_segments": 2
+        }
+    ],
+    "browser": {
+        "chromium": "158.0.8127.36",
+        "checks": [
+            "rtl-image-visible",
+            "localized-copy-readable",
+            "reviewer-cannot-publish",
+            "channel-withdrawal-receipt",
+            "recall-complete",
+            "cross-tenant-list-isolated"
+        ]
+    }
+}

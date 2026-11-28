@@ -15,8 +15,11 @@ header('Content-Security-Policy: default-src \'self\'; img-src \'self\' blob:; f
 header('Cache-Control: no-store');
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+if (is_string($path) && preg_match('~\A/campaigns/[^/]+/placements\z~D', $path)) {
+    $path = '/api' . $path;
+}
 $staticFiles = ['/' => ['workbench.html', 'text/html'], '/studio.css' => ['studio.css', 'text/css'],
-    '/studio.js' => ['studio.js', 'text/javascript']];
+    '/studio.js' => ['studio.js', 'text/javascript'], '/campaigns.js' => ['campaigns.js', 'text/javascript']];
 if ($method === 'GET' && isset($staticFiles[$path])) {
     [$name, $type] = $staticFiles[$path];
     header("Content-Type: $type; charset=utf-8");
@@ -88,6 +91,35 @@ try {
             ['GET', 'candidates', false, 'image'], ['GET', 'candidates', false, 'source'] => ['png' => $studio->delivery->compare($who, $id, $action === 'source')],
             ['GET', 'bundles', false, 'download'] => ['download' => $studio->delivery->zip($who, $id)],
             ['GET', 'audit', false, ''] => $studio->audit($who, $id),
+            ['GET', 'campaigns', true, ''] => $studio->campaigns->listing($who),
+            ['POST', 'campaigns', true, ''] => $studio->campaigns->create($who, payload()),
+            ['GET', 'campaigns', false, ''] => $studio->campaigns->workspace($who, $id),
+            ['GET', 'campaigns', false, 'master'] => $studio->campaigns->master($who, $id, requestedRevision()),
+            ['POST', 'campaigns', false, 'master'] => $studio->campaigns->freeze($who, $id, payload()),
+            ['GET', 'campaigns', false, 'terms'] => $studio->campaigns->terms($who, $id, $_GET['locale'] ?? '', requestedRevision()),
+            ['POST', 'campaigns', false, 'terms'] => $studio->campaigns->setTerms($who, $id, payload()),
+            ['GET', 'campaigns', false, 'localizations'] => $studio->campaigns->localeVersion($who, $id, $_GET['territory'] ?? '', $_GET['locale'] ?? '', requestedRevision()),
+            ['POST', 'campaigns', false, 'localizations'], ['POST', 'campaigns', false, 'translate'] => $studio->campaigns->localize($who, $id, payload(), $action === 'translate'),
+            ['POST', 'campaigns', false, 'renders'] => $studio->campaignLayout->render($who, $id, payload()),
+            ['GET', 'campaigns', false, 'renders'] => $studio->campaignLayout->listing($who, $id),
+            ['GET', 'campaigns', false, 'placements'] => $studio->campaignPlacements->listing($who, $id),
+            ['POST', 'campaigns', false, 'placements'] => submitPlacement($studio, $who, $id),
+            ['GET', 'campaign-renders', false, ''] => $studio->campaignLayout->record($who, $id),
+            ['GET', 'campaign-renders', false, 'image'] => ['png' => $studio->campaignLayout->preview($who, $id)],
+            ['GET', 'campaign-renders', false, 'approve'] => ['approval' => $studio->campaignRights->latestApproval($who, $id)],
+            ['POST', 'campaign-renders', false, 'rights-preview'] => $studio->campaignRights->preview($who, $id, payload()),
+            ['POST', 'campaign-renders', false, 'approve'] => $studio->campaignRights->approve($who, $id, payload()),
+            ['POST', 'campaign-fonts', true, ''] => $studio->campaigns->registerFont($who, body(4 * 1024 * 1024),
+                $_SERVER['HTTP_X_FONT_FAMILY'] ?? null, $_SERVER['HTTP_X_FONT_LICENSE'] ?? null, $_SERVER['HTTP_X_FONT_EVIDENCE'] ?? null),
+            ['GET', 'campaign-fonts', false, ''] => $studio->campaigns->font($who, $id, false),
+            ['GET', 'campaign-grants', true, ''] => $studio->campaignRights->listing($who),
+            ['POST', 'campaign-grants', false, ''] => $studio->campaignRights->grant($who, $id, payload()),
+            ['GET', 'campaign-recalls', false, ''] => $studio->campaignRecalls->record($who, $id),
+            ['POST', 'campaign-recalls', true, ''] => $studio->campaignRecalls->revoke($who, payload()),
+            ['GET', 'campaign-placements', false, ''] => $studio->campaignPlacements->record($who, $id),
+            ['POST', 'campaign-placements', false, 'retry'] => $studio->campaignPlacements->retry($who, $id, payload()['operation'] ?? ''),
+            ['POST', 'campaign-placements', false, 'withdraw'] => $studio->campaignRecalls->withdraw($who, $id, payload()),
+            ['POST', 'campaign-dispatch', true, ''] => ['placement' => $studio->campaignDispatcher->step($who)],
             default => throw Problem::missing(),
         };
     }
@@ -112,7 +144,7 @@ try {
     }
 } catch (Problem $problem) {
     http_response_code($problem->status);
-    send(['error' => $problem->kind, 'message' => $problem->getMessage()]);
+    send(['error' => $problem->kind, 'message' => $problem->getMessage()] + $problem->detail);
 } catch (JsonException | TypeError) {
     http_response_code(422);
     send(['error' => 'invalid-input', 'message' => 'Review request field types and JSON syntax.']);
@@ -126,6 +158,23 @@ function send(array $value): void
 {
     header('Content-Type: application/json; charset=utf-8');
     echo Values::json($value);
+}
+
+function requestedRevision(): ?int
+{
+    if (!isset($_GET['revision'])) {
+        return null;
+    }
+    $value = filter_var($_GET['revision'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 1000000]]);
+    return $value === false ? throw Problem::invalid('Choose a valid revision number.') : $value;
+}
+
+function submitPlacement(Studio $studio, CreativeBatch\Scope $scope, string $id): array
+{
+    $result = $studio->campaignPlacements->submit($scope, $id, $_SERVER['HTTP_IDEMPOTENCY_KEY'] ?? null, payload());
+    http_response_code(isset($result['replayed']) ? 200 : 202);
+    header('Location: /api/campaign-placements/' . $result['placement_id']);
+    return $result;
 }
 
 function rework(Studio $studio, CreativeBatch\Scope $scope, string $id, array $input): array

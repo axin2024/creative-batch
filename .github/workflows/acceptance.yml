@@ -42,6 +42,38 @@ jobs:
           sudo apt-get install --yes php-cli php-gd php-zip php-mysql php-curl
           find src public tests bin -name '*.php' -print0 | xargs -0 -n1 php -l
           node --check public/studio.js
+          node --check public/campaigns.js
+          node --check tests/campaign-browser.mjs
           php tests/lifecycle.php
           php tests/provider.php
           php tests/evaluation.php
+      - name: Rehearse regional layout, rights and connector receipts
+        env:
+          CREATIVE_MYSQL_DSN: mysql:host=127.0.0.1;port=${{ job.services.mysql.ports[3306] }};dbname=creative_test;charset=utf8mb4
+          CREATIVE_MYSQL_USER: creative_test
+          CREATIVE_MYSQL_PASSWORD: creative-ci-app
+          CREATIVE_TEST_FONTS: examples/fonts
+          CREATIVE_LAYOUT_PORT: '18128'
+          CREATIVE_LAYOUT_URL: http://127.0.0.1:18128
+          CREATIVE_LAYOUT_TOKEN: ci-regional-layout-fixture
+          CREATIVE_CAMPAIGN_CHANNELS: '{"square":{"url":"http://127.0.0.1:18129"},"portrait":{"url":"http://127.0.0.1:18129"},"banner":{"url":"http://127.0.0.1:18129"},"email":{"url":"http://127.0.0.1:18129"}}'
+          CREATIVE_TEST_WEB_ORIGIN: http://127.0.0.1:18130
+        run: |
+          npm ci
+          npx --no-install playwright-core install --with-deps chromium
+          export CREATIVE_CHANNEL_ROOT="$RUNNER_TEMP/campaign-spool"
+          export CREATIVE_TEST_CHANNEL_STATE="$RUNNER_TEMP/campaign-remote"
+          mkdir -p "$CREATIVE_TEST_CHANNEL_STATE"
+          node tools/layout.mjs >"$RUNNER_TEMP/layout.log" 2>&1 &
+          layout=$!
+          php -S 127.0.0.1:18129 tests/channel-router.php >"$RUNNER_TEMP/channel.log" 2>&1 &
+          channel=$!
+          php -S 127.0.0.1:18130 -t public public/index.php >"$RUNNER_TEMP/creative.log" 2>&1 &
+          web=$!
+          trap 'kill "$layout" "$channel" "$web" 2>/dev/null || true' EXIT
+          for i in {1..30}; do
+            grep -q 'Layout renderer listening' "$RUNNER_TEMP/layout.log" && break
+            sleep 1
+          done
+          grep -q 'Layout renderer listening' "$RUNNER_TEMP/layout.log"
+          php tests/campaign.php

@@ -8,7 +8,7 @@ use RuntimeException;
 
 final class Problem extends RuntimeException
 {
-    public function __construct(public readonly int $status, public readonly string $kind, string $message)
+    public function __construct(public readonly int $status, public readonly string $kind, string $message, public readonly array $detail = [])
     {
         parent::__construct($message);
     }

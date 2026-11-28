@@ -10,6 +10,12 @@ final readonly class Studio
     public Catalog $catalog;
     public Production $production;
     public Delivery $delivery;
+    public Campaigns $campaigns;
+    public CampaignLayout $campaignLayout;
+    public CampaignRights $campaignRights;
+    public CampaignPlacements $campaignPlacements;
+    public CampaignRecalls $campaignRecalls;
+    public CampaignDispatcher $campaignDispatcher;
 
     public function __construct(public Db $db)
     {
@@ -17,6 +23,13 @@ final readonly class Studio
         $this->catalog = new Catalog($db);
         $this->production = new Production($db, $this->catalog, new ArtDirection(), new ImageBackend());
         $this->delivery = new Delivery($db, $this->catalog, $this->production);
+        $this->campaigns = new Campaigns($db, $this->catalog, new TranslationBackend());
+        $this->campaignLayout = new CampaignLayout($db, $this->catalog, $this->campaigns);
+        $this->campaignRights = new CampaignRights($db, $this->catalog, $this->campaigns, $this->campaignLayout);
+        $connector = new CampaignConnector();
+        $this->campaignPlacements = new CampaignPlacements($db, $this->catalog, $this->campaigns, $this->campaignLayout, $this->campaignRights, $connector);
+        $this->campaignRecalls = new CampaignRecalls($db, $this->catalog, $this->campaignRights, $this->campaignPlacements);
+        $this->campaignDispatcher = new CampaignDispatcher($db, $this->catalog, $this->campaignLayout, $this->campaignPlacements, $this->campaignRecalls, $connector);
     }
 
     public function audit(Scope $scope, string $id): array
