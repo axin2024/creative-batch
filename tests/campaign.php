@@ -260,9 +260,11 @@ if ($connectorState) {
 }
 if (!$capacity && getenv('CREATIVE_TEST_WEB_ORIGIN')) {
     $credentials = $studio->access->provision('kite-regional', 'browser-reviewer', 'reviewer', 1);
+    $browserAdmin = $studio->access->provision('kite-regional', 'browser-admin', 'admin', 1);
     $external = $studio->access->provision('unrelated', 'browser-visitor', 'reviewer', 1);
     $environment = getenv() + ['CREATIVE_BROWSER_TOKEN' => $credentials['token'], 'CREATIVE_BROWSER_FOREIGN' => $external['token'],
-        'CREATIVE_BROWSER_RECALL' => $recall['recall_id']];
+        'CREATIVE_BROWSER_RECALL' => $recall['recall_id'], 'CREATIVE_BROWSER_ADMIN' => $browserAdmin['token'],
+        'CREATIVE_BROWSER_FONT' => $fonts['sans']];
     $browser = proc_open(['node', __DIR__ . '/campaign-browser.mjs'], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => STDERR],
         $pipes, dirname(__DIR__), $environment);
     verify(is_resource($browser), 'Start the isolated campaign workbench browser.');

@@ -1,0 +1,28 @@
+{
+  "connector_fixture": {
+    "chromium": "158.0.8127.36",
+    "checks": [
+      "rtl-image-visible",
+      "localized-copy-readable",
+      "reviewer-cannot-publish-or-register-grants",
+      "channel-withdrawal-receipt",
+      "recall-complete",
+      "font-upload",
+      "region-grant-saved",
+      "cross-tenant-list-isolated"
+    ]
+  },
+  "local_model_workflow": {
+    "chromium": "158.0.8127.36",
+    "checks": [
+      "rtl-image-visible",
+      "localized-copy-readable",
+      "reviewer-cannot-publish-or-register-grants",
+      "channel-withdrawal-receipt",
+      "recall-complete",
+      "font-upload",
+      "region-grant-saved",
+      "cross-tenant-list-isolated"
+    ]
+  }
+}

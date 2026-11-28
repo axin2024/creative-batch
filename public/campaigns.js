@@ -74,7 +74,55 @@
       });
       menu.append(form);
     }
+    if (can('designer') || can('reviewer')) addFontRegistration(workspace);
+    if (state.role === 'admin') addRightsRegistration(workspace);
     if (selected) await showCampaign(workspace, selected, version);
+  }
+
+  function addFontRegistration(workspace) {
+    const section = card(workspace, '字体登记');
+    const form = el('form');
+    const file = field(form, '字体文件', '', { type: 'file' });
+    file.accept = '.ttf,.otf';
+    const family = field(form, '字体名称');
+    const license = field(form, '字体许可证');
+    const evidence = field(form, '许可证地址');
+    const output = el('pre');
+    submit(form, '登记字体', async () => {
+      receipt(output, await post('campaign-fonts', file.files[0], {
+        'Content-Type': 'application/octet-stream', 'X-Font-Family': family.value.trim(),
+        'X-Font-License': license.value.trim(), 'X-Font-Evidence': evidence.value.trim()
+      }));
+    });
+    section.append(form, output);
+  }
+
+  function addRightsRegistration(workspace) {
+    const section = card(workspace, '地区许可登记');
+    const form = el('form');
+    const id = field(form, '许可编号');
+    const version = field(form, '当前许可修订号', '0', { type: 'number' });
+    const type = field(form, '素材类型（image 或 font）', 'image');
+    const digest = field(form, '许可素材摘要');
+    const territories = field(form, '授权地区（逗号分隔）');
+    const channels = field(form, '授权渠道（逗号分隔）');
+    const validFrom = field(form, '许可生效时间', '', { type: 'datetime-local' });
+    const validUntil = field(form, '许可到期时间', '', { type: 'datetime-local' });
+    const licensor = field(form, '许可方');
+    const proof = field(form, '许可证明');
+    const commercial = field(form, '允许商业使用', '', { type: 'checkbox', required: false });
+    const split = value => value.split(/[,，]/).map(part => part.trim()).filter(Boolean);
+    const output = el('pre');
+    submit(form, '保存地区许可', async () => {
+      const saved = await post('campaign-grants/' + encodeURIComponent(id.value.trim()), {
+        expected_revision: Number(version.value), asset_type: type.value.trim(), source_digest: digest.value.trim(),
+        territories: split(territories.value.toUpperCase()), channels: split(channels.value), valid_from: date(validFrom.value),
+        valid_until: date(validUntil.value), licensor: licensor.value.trim(), evidence: proof.value.trim(), commercial: commercial.checked
+      });
+      version.value = saved.revision;
+      receipt(output, saved);
+    });
+    section.append(form, output);
   }
 
   async function showCampaign(workspace, id, version) {
